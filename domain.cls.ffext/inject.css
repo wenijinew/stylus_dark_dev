@@ -1,0 +1,5182 @@
+/* static aliases */
+/*END: Color Framework*/
+/**
+* mixin for color setting. no box shadow.
+* arguments: x - foreground, y - background, z - border color(background and border), r - border radius
+*
+* usage:
+* c: fg bdc bg - to set color, border-color, and background-color
+* c: fg bdc bg 1 1 1 - to set color, border-color, and background-color with !important annotation
+* c: 0 bdc - only set border-color without !important annotation
+*/
+/*svg mixin - TODO: check how to use this*/
+/*svg mixin to set fill and stroke
+https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Fills_and_Strokes
+*/
+
+
+@charset "UTF-8";
+  :root {
+    --font_size: 14px;
+    --code_font_size: 16px;
+    --bg-0: hsla(0,0%,4.32%,1);
+    --bg-1: hsla(0,0%,4.71%,1);
+    --bg-2: hsla(0,0%,8.63%,1);
+    --bg-3: hsla(0,0%,11.77%,1);
+    --bg-4: hsla(0,0%,16.08%,1);
+    --bg-5: hsla(0,0%,21.57%,1);
+    --bg-6: hsla(0,0%,27.46%,1);
+    --bg-7: hsla(0,0%,34.91%,1);
+    --bg-8: hsla(0,0%,42.75%,1);
+    --bg-9: hsla(0,0%,51.77%,1);
+    --fg-0: hsla(0,0%,95.3%,1);
+    --fg-1: hsla(0,0%,94.91%,1);
+    --fg-2: hsla(0,0%,77.65%,1);
+    --fg-3: hsla(0,0%,69.42%,1);
+    --fg-4: hsla(0,0%,60.79%,1);
+    --fg-5: hsla(0,0%,52.16%,1);
+    --fg-6: hsla(0,0%,43.53%,1);
+    --fg-7: hsla(0,0%,35.3%,1);
+    --fg-8: hsla(0,0%,26.67%,1);
+    --fg-9: hsla(0,0%,18.04%,1);
+    --v0-0: hsla(206.32,100%,11.18%,1);
+    --v0-1: hsla(207.28,100%,16.1%,1);
+    --v0-2: hsla(206.88,100%,20.83%,1);
+    --v0-3: hsla(207.14,100%,25.55%,1);
+    --v0-4: hsla(206.87,100%,30.28%,1);
+    --v0-5: hsla(207.06,100%,35%,1);
+    --v0-6: hsla(206.87,100%,39.73%,1);
+    --v0-7: hsla(207.02,100%,44.46%,1);
+    --v0-8: hsla(206.86,100%,49.18%,1);
+    --v0-9: hsla(207.14,100%,54.1%,1);
+    --v1-0: hsla(0,60.87%,9.02%,1);
+    --v1-1: hsla(0,59.43%,14.53%,1);
+    --v1-2: hsla(0,60.44%,19.85%,1);
+    --v1-3: hsla(0,60%,25.55%,1);
+    --v1-4: hsla(0,59.43%,31.06%,1);
+    --v1-5: hsla(0,60.25%,36.57%,1);
+    --v1-6: hsla(0,59.79%,42.08%,1);
+    --v1-7: hsla(0,60.2%,47.4%,1);
+    --v1-8: hsla(0,60%,53.1%,1);
+    --v1-9: hsla(0,60.32%,58.42%,1);
+    --v2-0: hsla(30,60.87%,9.02%,1);
+    --v2-1: hsla(29.27,59.43%,14.53%,1);
+    --v2-2: hsla(30.55,60.44%,19.85%,1);
+    --v2-3: hsla(29.57,60%,25.55%,1);
+    --v2-4: hsla(30,59.43%,31.06%,1);
+    --v2-5: hsla(29.7,60.25%,36.57%,1);
+    --v2-6: hsla(30.01,59.79%,42.08%,1);
+    --v2-7: hsla(30,60.2%,47.4%,1);
+    --v2-8: hsla(30.01,60%,53.1%,1);
+    --v2-9: hsla(30.01,60.32%,58.42%,1);
+    --v3-0: hsla(60,60.87%,9.02%,1);
+    --v3-1: hsla(60,59.43%,14.53%,1);
+    --v3-2: hsla(60,60.44%,19.85%,1);
+    --v3-3: hsla(60,60%,25.55%,1);
+    --v3-4: hsla(60,59.43%,31.06%,1);
+    --v3-5: hsla(60,60.25%,36.57%,1);
+    --v3-6: hsla(60,59.79%,42.08%,1);
+    --v3-7: hsla(60,60.2%,47.4%,1);
+    --v3-8: hsla(60,60%,53.1%,1);
+    --v3-9: hsla(60,60.32%,58.42%,1);
+    --v4-0: hsla(90,60.87%,9.02%,1);
+    --v4-1: hsla(90.74,59.43%,14.53%,1);
+    --v4-2: hsla(89.46,60.44%,19.85%,1);
+    --v4-3: hsla(90.44,60%,25.55%,1);
+    --v4-4: hsla(90,59.43%,31.06%,1);
+    --v4-5: hsla(90.31,60.25%,36.57%,1);
+    --v4-6: hsla(90,59.79%,42.08%,1);
+    --v4-7: hsla(90,60.2%,47.4%,1);
+    --v4-8: hsla(90,60%,53.1%,1);
+    --v4-9: hsla(90,60.32%,58.42%,1);
+    --v5-0: hsla(180,60.87%,9.02%,1);
+    --v5-1: hsla(180,59.43%,14.53%,1);
+    --v5-2: hsla(180,60.44%,19.85%,1);
+    --v5-3: hsla(180,60%,25.55%,1);
+    --v5-4: hsla(180,59.43%,31.06%,1);
+    --v5-5: hsla(180,60.25%,36.57%,1);
+    --v5-6: hsla(180,59.79%,42.08%,1);
+    --v5-7: hsla(180,60.2%,47.4%,1);
+    --v5-8: hsla(180,60%,53.1%,1);
+    --v5-9: hsla(180,60.32%,58.42%,1);
+    --v6-0: hsla(210,60.87%,9.02%,1);
+    --v6-1: hsla(210.74,59.43%,14.53%,1);
+    --v6-2: hsla(209.46,60.44%,19.85%,1);
+    --v6-3: hsla(210.44,60%,25.55%,1);
+    --v6-4: hsla(210,59.43%,31.06%,1);
+    --v6-5: hsla(210.31,60.25%,36.57%,1);
+    --v6-6: hsla(210,59.79%,42.08%,1);
+    --v6-7: hsla(210,60.2%,47.4%,1);
+    --v6-8: hsla(210,60%,53.1%,1);
+    --v6-9: hsla(210,60.32%,58.42%,1);
+    --v7-0: hsla(270,60.87%,9.02%,1);
+    --v7-1: hsla(269.27,59.43%,14.53%,1);
+    --v7-2: hsla(270.55,60.44%,19.85%,1);
+    --v7-3: hsla(269.57,60%,25.55%,1);
+    --v7-4: hsla(270,59.43%,31.06%,1);
+    --v7-5: hsla(269.7,60.25%,36.57%,1);
+    --v7-6: hsla(270,59.79%,42.08%,1);
+    --v7-7: hsla(270,60.2%,47.4%,1);
+    --v7-8: hsla(270,60%,53.1%,1);
+    --v7-9: hsla(270,60.32%,58.42%,1);
+    --v8-0: hsla(300,60.87%,9.02%,1);
+    --v8-1: hsla(300,59.43%,14.53%,1);
+    --v8-2: hsla(300,60.44%,19.85%,1);
+    --v8-3: hsla(300,60%,25.55%,1);
+    --v8-4: hsla(300,59.43%,31.06%,1);
+    --v8-5: hsla(300,60.25%,36.57%,1);
+    --v8-6: hsla(300,59.79%,42.08%,1);
+    --v8-7: hsla(300,60.2%,47.4%,1);
+    --v8-8: hsla(300,60%,53.1%,1);
+    --v8-9: hsla(300,60.32%,58.42%,1);
+    --v9-0: hsla(0,0%,16.87%,1);
+    --v9-1: hsla(0,0%,25.5%,1);
+    --v9-2: hsla(0,0%,34.12%,1);
+    --v9-3: hsla(0,0%,42.36%,1);
+    --v9-4: hsla(0,0%,50.99%,1);
+    --v9-5: hsla(0,0%,59.61%,1);
+    --v9-6: hsla(0,0%,67.85%,1);
+    --v9-7: hsla(0,0%,76.48%,1);
+    --v9-8: hsla(0,0%,85.1%,1);
+    --v9-9: hsla(0,0%,93.34%,1);
+    --h1: 40px;
+    --h2: 35px;
+    --h3: 30px;
+    --h4: 25px;
+    --h5: 20px;
+    --h6: 15px;
+    --pd0: 0px;
+    --pd1: 3px;
+    --pd2: 6px;
+    --pd3: 9px;
+    --pd4: 12px;
+    --pd5: 15px;
+    --pd6: 18px;
+    --pd7: 21px;
+    --pd8: 24px;
+    --pd9: 27px;
+    --pd10: 30px;
+    --md0: 0px;
+    --md1: 5px;
+    --md2: 10px;
+    --md3: 15px;
+    --md4: 20px;
+    --md5: 25px;
+    --md6: 30px;
+    --md7: 35px;
+    --md8: 40px;
+    --md9: 45px;
+    --md10: 50px;
+  }
+@media screen and (min-width: 2000px) {
+    :root {
+      --font_size: 20px;
+      --code_font_size: 22px;
+    }
+}
+  html .search-results-list mark,
+  body .search-results-list mark {
+    color: var(--bg-2) !important;
+    background: var(--v3-6) !important;
+    background-color: var(--v3-6) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html *,
+  body * {
+    border-color: var(--bg-5) !important;
+    border-width: 0.5px !important;
+  }
+  html,
+  body,
+  html p,
+  body p,
+  html span,
+  body span,
+  html div,
+  body div,
+  html table,
+  body table,
+  html td,
+  body td,
+  html th,
+  body th,
+  html pre,
+  body pre,
+  html li,
+  body li,
+  html a,
+  body a,
+  html label,
+  body label {
+    font-size: var(--font_size) !important;
+    font-family: "Ericsson Hilda", Arial, Helvetica, Sans-serif, Courier, Courier-New;
+  }
+  html,
+  body,
+  html p,
+  body p,
+  html div:not([class*="player"]):not([class*="over"]),
+  body div:not([class*="player"]):not([class*="over"]),
+  html table,
+  body table,
+  html td,
+  body td,
+  html label,
+  body label,
+  html li,
+  body li {
+    color: var(--fg-3);
+    background: var(--bg-3);
+    background-color: var(--bg-3);
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html strong,
+  body strong,
+  html b,
+  body b {
+    color: var(--v2-7) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html a:not([class*="button"]):not([class*="btn"]),
+  body a:not([class*="button"]):not([class*="btn"]),
+  html a:not([class*="button"]):not([class*="btn"]):hover,
+  body a:not([class*="button"]):not([class*="btn"]):hover {
+    color: #008cff !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html a:not([class*="button"]):not([class*="btn"]):hover,
+  body a:not([class*="button"]):not([class*="btn"]):hover,
+  html a:not([class*="button"]):not([class*="btn"]):focus,
+  body a:not([class*="button"]):not([class*="btn"]):focus {
+    background-color: var(--bg-2) !important;
+  }
+  html a:not([class*="button"]):not([class*="btn"]):-webkit-any-link,
+  body a:not([class*="button"]):not([class*="btn"]):-webkit-any-link {
+    text-decoration: none !important;
+  }
+  html code,
+  body code,
+  html pre,
+  body pre,
+  html [class*="code"],
+  body [class*="code"],
+  html [class*="lang"]:not(body):not(a),
+  body [class*="lang"]:not(body):not(a),
+  html [class*="language"]:not(body):not(a),
+  body [class*="language"]:not(body):not(a) {
+    box-shadow: unset !important;
+    text-shadow: unset !important;
+    margin: 0px;
+    margin-top: var(--md1);
+    margin-bottom: var(--md1);
+    line-height: 1.5em;
+  }
+  html code,
+  body code,
+  html pre,
+  body pre,
+  html [class*="code"],
+  body [class*="code"],
+  html [class*="lang"]:not(body):not(a),
+  body [class*="lang"]:not(body):not(a),
+  html [class*="language"]:not(body):not(a),
+  body [class*="language"]:not(body):not(a) {
+    padding: var(--pd1);
+  }
+  html code,
+  body code,
+  html pre,
+  body pre,
+  html [class*="code"],
+  body [class*="code"],
+  html [class*="lang"]:not(body):not(a),
+  body [class*="lang"]:not(body):not(a),
+  html [class*="language"]:not(body):not(a),
+  body [class*="language"]:not(body):not(a),
+  html code>span,
+  body code>span,
+  html pre>span,
+  body pre>span,
+  html [class*="code"]>span,
+  body [class*="code"]>span,
+  html [class*="lang"]:not(body):not(a)>span,
+  body [class*="lang"]:not(body):not(a)>span,
+  html [class*="language"]:not(body):not(a)>span,
+  body [class*="language"]:not(body):not(a)>span {
+    font-size: var(--code_font_size) !important;
+    font-family: courier, courier-new !important;
+    color: var(--fg-2);
+    background: var(--bg-4) !important;
+    background-color: var(--bg-4) !important;
+    border: solid 0.5px var(--bg-5);
+    border-left: solid 0.5px var(--bg-5);
+    border-right: solid 0.5px var(--bg-5);
+    border-top: solid 0.5px var(--bg-5);
+    border-bottom: solid 0.5px var(--bg-5);
+    border-radius: 3px !important;
+    box-shadow: unset !important;
+    line-height: 1.5em;
+  }
+  html code [class*="linenum"],
+  body code [class*="linenum"],
+  html pre [class*="linenum"],
+  body pre [class*="linenum"],
+  html [class*="code"] [class*="linenum"],
+  body [class*="code"] [class*="linenum"],
+  html [class*="lang"]:not(body):not(a) [class*="linenum"],
+  body [class*="lang"]:not(body):not(a) [class*="linenum"],
+  html [class*="language"]:not(body):not(a) [class*="linenum"],
+  body [class*="language"]:not(body):not(a) [class*="linenum"],
+  html code [class*="line-num"],
+  body code [class*="line-num"],
+  html pre [class*="line-num"],
+  body pre [class*="line-num"],
+  html [class*="code"] [class*="line-num"],
+  body [class*="code"] [class*="line-num"],
+  html [class*="lang"]:not(body):not(a) [class*="line-num"],
+  body [class*="lang"]:not(body):not(a) [class*="line-num"],
+  html [class*="language"]:not(body):not(a) [class*="line-num"],
+  body [class*="language"]:not(body):not(a) [class*="line-num"],
+  html code [class*="line_num"],
+  body code [class*="line_num"],
+  html pre [class*="line_num"],
+  body pre [class*="line_num"],
+  html [class*="code"] [class*="line_num"],
+  body [class*="code"] [class*="line_num"],
+  html [class*="lang"]:not(body):not(a) [class*="line_num"],
+  body [class*="lang"]:not(body):not(a) [class*="line_num"],
+  html [class*="language"]:not(body):not(a) [class*="line_num"],
+  body [class*="language"]:not(body):not(a) [class*="line_num"],
+  html code [class*="linenum"] *,
+  body code [class*="linenum"] *,
+  html pre [class*="linenum"] *,
+  body pre [class*="linenum"] *,
+  html [class*="code"] [class*="linenum"] *,
+  body [class*="code"] [class*="linenum"] *,
+  html [class*="lang"]:not(body):not(a) [class*="linenum"] *,
+  body [class*="lang"]:not(body):not(a) [class*="linenum"] *,
+  html [class*="language"]:not(body):not(a) [class*="linenum"] *,
+  body [class*="language"]:not(body):not(a) [class*="linenum"] *,
+  html code [class*="line-num"] *,
+  body code [class*="line-num"] *,
+  html pre [class*="line-num"] *,
+  body pre [class*="line-num"] *,
+  html [class*="code"] [class*="line-num"] *,
+  body [class*="code"] [class*="line-num"] *,
+  html [class*="lang"]:not(body):not(a) [class*="line-num"] *,
+  body [class*="lang"]:not(body):not(a) [class*="line-num"] *,
+  html [class*="language"]:not(body):not(a) [class*="line-num"] *,
+  body [class*="language"]:not(body):not(a) [class*="line-num"] *,
+  html code [class*="line_num"] *,
+  body code [class*="line_num"] *,
+  html pre [class*="line_num"] *,
+  body pre [class*="line_num"] *,
+  html [class*="code"] [class*="line_num"] *,
+  body [class*="code"] [class*="line_num"] *,
+  html [class*="lang"]:not(body):not(a) [class*="line_num"] *,
+  body [class*="lang"]:not(body):not(a) [class*="line_num"] *,
+  html [class*="language"]:not(body):not(a) [class*="line_num"] *,
+  body [class*="language"]:not(body):not(a) [class*="line_num"] * {
+    line-height: 1.5em;
+    font-size: var(--code_font_size) !important;
+    font-family: courier, courier-new !important;
+  }
+  html code>pre,
+  body code>pre,
+  html pre>pre,
+  body pre>pre,
+  html [class*="code"]>pre,
+  body [class*="code"]>pre,
+  html [class*="lang"]:not(body):not(a)>pre,
+  body [class*="lang"]:not(body):not(a)>pre,
+  html [class*="language"]:not(body):not(a)>pre,
+  body [class*="language"]:not(body):not(a)>pre,
+  html code>code,
+  body code>code,
+  html pre>code,
+  body pre>code,
+  html [class*="code"]>code,
+  body [class*="code"]>code,
+  html [class*="lang"]:not(body):not(a)>code,
+  body [class*="lang"]:not(body):not(a)>code,
+  html [class*="language"]:not(body):not(a)>code,
+  body [class*="language"]:not(body):not(a)>code,
+  html code>[class*="code"],
+  body code>[class*="code"],
+  html pre>[class*="code"],
+  body pre>[class*="code"],
+  html [class*="code"]>[class*="code"],
+  body [class*="code"]>[class*="code"],
+  html [class*="lang"]:not(body):not(a)>[class*="code"],
+  body [class*="lang"]:not(body):not(a)>[class*="code"],
+  html [class*="language"]:not(body):not(a)>[class*="code"],
+  body [class*="language"]:not(body):not(a)>[class*="code"],
+  html code>span,
+  body code>span,
+  html pre>span,
+  body pre>span,
+  html [class*="code"]>span,
+  body [class*="code"]>span,
+  html [class*="lang"]:not(body):not(a)>span,
+  body [class*="lang"]:not(body):not(a)>span,
+  html [class*="language"]:not(body):not(a)>span,
+  body [class*="language"]:not(body):not(a)>span,
+  html code>pre *,
+  body code>pre *,
+  html pre>pre *,
+  body pre>pre *,
+  html [class*="code"]>pre *,
+  body [class*="code"]>pre *,
+  html [class*="lang"]:not(body):not(a)>pre *,
+  body [class*="lang"]:not(body):not(a)>pre *,
+  html [class*="language"]:not(body):not(a)>pre *,
+  body [class*="language"]:not(body):not(a)>pre *,
+  html code>code *,
+  body code>code *,
+  html pre>code *,
+  body pre>code *,
+  html [class*="code"]>code *,
+  body [class*="code"]>code *,
+  html [class*="lang"]:not(body):not(a)>code *,
+  body [class*="lang"]:not(body):not(a)>code *,
+  html [class*="language"]:not(body):not(a)>code *,
+  body [class*="language"]:not(body):not(a)>code *,
+  html code>[class*="code"] *,
+  body code>[class*="code"] *,
+  html pre>[class*="code"] *,
+  body pre>[class*="code"] *,
+  html [class*="code"]>[class*="code"] *,
+  body [class*="code"]>[class*="code"] *,
+  html [class*="lang"]:not(body):not(a)>[class*="code"] *,
+  body [class*="lang"]:not(body):not(a)>[class*="code"] *,
+  html [class*="language"]:not(body):not(a)>[class*="code"] *,
+  body [class*="language"]:not(body):not(a)>[class*="code"] *,
+  html code>span *,
+  body code>span *,
+  html pre>span *,
+  body pre>span *,
+  html [class*="code"]>span *,
+  body [class*="code"]>span *,
+  html [class*="lang"]:not(body):not(a)>span *,
+  body [class*="lang"]:not(body):not(a)>span *,
+  html [class*="language"]:not(body):not(a)>span *,
+  body [class*="language"]:not(body):not(a)>span * {
+    border: solid 0 var(--bg-5) !important;
+    margin: 0px !important;
+    margin-bottom: 0px !important;
+    color: var(--fg-2);
+    background: var(--bg-4) !important;
+    background-color: var(--bg-4) !important;
+    border: solid 0.5px var(--bg-5);
+    border-left: solid 0.5px var(--bg-5);
+    border-right: solid 0.5px var(--bg-5);
+    border-top: solid 0.5px var(--bg-5);
+    border-bottom: solid 0.5px var(--bg-5);
+    border-radius: 3px !important;
+    box-shadow: unset !important;
+  }
+  html code span,
+  body code span,
+  html pre span,
+  body pre span,
+  html [class*="code"] span,
+  body [class*="code"] span,
+  html [class*="lang"]:not(body):not(a) span,
+  body [class*="lang"]:not(body):not(a) span,
+  html [class*="language"]:not(body):not(a) span,
+  body [class*="language"]:not(body):not(a) span {
+    font-weight: 400 !important;
+  }
+  html code span.hljs-at_rule,
+  body code span.hljs-at_rule,
+  html pre span.hljs-at_rule,
+  body pre span.hljs-at_rule,
+  html [class*="code"] span.hljs-at_rule,
+  body [class*="code"] span.hljs-at_rule,
+  html [class*="lang"]:not(body):not(a) span.hljs-at_rule,
+  body [class*="lang"]:not(body):not(a) span.hljs-at_rule,
+  html [class*="language"]:not(body):not(a) span.hljs-at_rule,
+  body [class*="language"]:not(body):not(a) span.hljs-at_rule,
+  html code span.number,
+  body code span.number,
+  html pre span.number,
+  body pre span.number,
+  html [class*="code"] span.number,
+  body [class*="code"] span.number,
+  html [class*="lang"]:not(body):not(a) span.number,
+  body [class*="lang"]:not(body):not(a) span.number,
+  html [class*="language"]:not(body):not(a) span.number,
+  body [class*="language"]:not(body):not(a) span.number,
+  html code span.kt,
+  body code span.kt,
+  html pre span.kt,
+  body pre span.kt,
+  html [class*="code"] span.kt,
+  body [class*="code"] span.kt,
+  html [class*="lang"]:not(body):not(a) span.kt,
+  body [class*="lang"]:not(body):not(a) span.kt,
+  html [class*="language"]:not(body):not(a) span.kt,
+  body [class*="language"]:not(body):not(a) span.kt,
+  html code span.mi,
+  body code span.mi,
+  html pre span.mi,
+  body pre span.mi,
+  html [class*="code"] span.mi,
+  body [class*="code"] span.mi,
+  html [class*="lang"]:not(body):not(a) span.mi,
+  body [class*="lang"]:not(body):not(a) span.mi,
+  html [class*="language"]:not(body):not(a) span.mi,
+  body [class*="language"]:not(body):not(a) span.mi,
+  html code span.s2,
+  body code span.s2,
+  html pre span.s2,
+  body pre span.s2,
+  html [class*="code"] span.s2,
+  body [class*="code"] span.s2,
+  html [class*="lang"]:not(body):not(a) span.s2,
+  body [class*="lang"]:not(body):not(a) span.s2,
+  html [class*="language"]:not(body):not(a) span.s2,
+  body [class*="language"]:not(body):not(a) span.s2,
+  html code span.s,
+  body code span.s,
+  html pre span.s,
+  body pre span.s,
+  html [class*="code"] span.s,
+  body [class*="code"] span.s,
+  html [class*="lang"]:not(body):not(a) span.s,
+  body [class*="lang"]:not(body):not(a) span.s,
+  html [class*="language"]:not(body):not(a) span.s,
+  body [class*="language"]:not(body):not(a) span.s,
+  html code span.function,
+  body code span.function,
+  html pre span.function,
+  body pre span.function,
+  html [class*="code"] span.function,
+  body [class*="code"] span.function,
+  html [class*="lang"]:not(body):not(a) span.function,
+  body [class*="lang"]:not(body):not(a) span.function,
+  html [class*="language"]:not(body):not(a) span.function,
+  body [class*="language"]:not(body):not(a) span.function,
+  html code span.builtin,
+  body code span.builtin,
+  html pre span.builtin,
+  body pre span.builtin,
+  html [class*="code"] span.builtin,
+  body [class*="code"] span.builtin,
+  html [class*="lang"]:not(body):not(a) span.builtin,
+  body [class*="lang"]:not(body):not(a) span.builtin,
+  html [class*="language"]:not(body):not(a) span.builtin,
+  body [class*="language"]:not(body):not(a) span.builtin {
+    color: var(--v1-9) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html code span.hljs-class,
+  body code span.hljs-class,
+  html pre span.hljs-class,
+  body pre span.hljs-class,
+  html [class*="code"] span.hljs-class,
+  body [class*="code"] span.hljs-class,
+  html [class*="lang"]:not(body):not(a) span.hljs-class,
+  body [class*="lang"]:not(body):not(a) span.hljs-class,
+  html [class*="language"]:not(body):not(a) span.hljs-class,
+  body [class*="language"]:not(body):not(a) span.hljs-class,
+  html code span.hljs-keyword,
+  body code span.hljs-keyword,
+  html pre span.hljs-keyword,
+  body pre span.hljs-keyword,
+  html [class*="code"] span.hljs-keyword,
+  body [class*="code"] span.hljs-keyword,
+  html [class*="lang"]:not(body):not(a) span.hljs-keyword,
+  body [class*="lang"]:not(body):not(a) span.hljs-keyword,
+  html [class*="language"]:not(body):not(a) span.hljs-keyword,
+  body [class*="language"]:not(body):not(a) span.hljs-keyword,
+  html code span.kn,
+  body code span.kn,
+  html pre span.kn,
+  body pre span.kn,
+  html [class*="code"] span.kn,
+  body [class*="code"] span.kn,
+  html [class*="lang"]:not(body):not(a) span.kn,
+  body [class*="lang"]:not(body):not(a) span.kn,
+  html [class*="language"]:not(body):not(a) span.kn,
+  body [class*="language"]:not(body):not(a) span.kn,
+  html code span.keyword,
+  body code span.keyword,
+  html pre span.keyword,
+  body pre span.keyword,
+  html [class*="code"] span.keyword,
+  body [class*="code"] span.keyword,
+  html [class*="lang"]:not(body):not(a) span.keyword,
+  body [class*="lang"]:not(body):not(a) span.keyword,
+  html [class*="language"]:not(body):not(a) span.keyword,
+  body [class*="language"]:not(body):not(a) span.keyword,
+  html code span.nc,
+  body code span.nc,
+  html pre span.nc,
+  body pre span.nc,
+  html [class*="code"] span.nc,
+  body [class*="code"] span.nc,
+  html [class*="lang"]:not(body):not(a) span.nc,
+  body [class*="lang"]:not(body):not(a) span.nc,
+  html [class*="language"]:not(body):not(a) span.nc,
+  body [class*="language"]:not(body):not(a) span.nc,
+  html code span.nf,
+  body code span.nf,
+  html pre span.nf,
+  body pre span.nf,
+  html [class*="code"] span.nf,
+  body [class*="code"] span.nf,
+  html [class*="lang"]:not(body):not(a) span.nf,
+  body [class*="lang"]:not(body):not(a) span.nf,
+  html [class*="language"]:not(body):not(a) span.nf,
+  body [class*="language"]:not(body):not(a) span.nf,
+  html code span.nn,
+  body code span.nn,
+  html pre span.nn,
+  body pre span.nn,
+  html [class*="code"] span.nn,
+  body [class*="code"] span.nn,
+  html [class*="lang"]:not(body):not(a) span.nn,
+  body [class*="lang"]:not(body):not(a) span.nn,
+  html [class*="language"]:not(body):not(a) span.nn,
+  body [class*="language"]:not(body):not(a) span.nn,
+  html code span.o,
+  body code span.o,
+  html pre span.o,
+  body pre span.o,
+  html [class*="code"] span.o,
+  body [class*="code"] span.o,
+  html [class*="lang"]:not(body):not(a) span.o,
+  body [class*="lang"]:not(body):not(a) span.o,
+  html [class*="language"]:not(body):not(a) span.o,
+  body [class*="language"]:not(body):not(a) span.o {
+    color: var(--v6-9) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html code span.hljs-attributeb,
+  body code span.hljs-attributeb,
+  html pre span.hljs-attributeb,
+  body pre span.hljs-attributeb,
+  html [class*="code"] span.hljs-attributeb,
+  body [class*="code"] span.hljs-attributeb,
+  html [class*="lang"]:not(body):not(a) span.hljs-attributeb,
+  body [class*="lang"]:not(body):not(a) span.hljs-attributeb,
+  html [class*="language"]:not(body):not(a) span.hljs-attributeb,
+  body [class*="language"]:not(body):not(a) span.hljs-attributeb,
+  html code span.sd,
+  body code span.sd,
+  html pre span.sd,
+  body pre span.sd,
+  html [class*="code"] span.sd,
+  body [class*="code"] span.sd,
+  html [class*="lang"]:not(body):not(a) span.sd,
+  body [class*="lang"]:not(body):not(a) span.sd,
+  html [class*="language"]:not(body):not(a) span.sd,
+  body [class*="language"]:not(body):not(a) span.sd,
+  html code span.string,
+  body code span.string,
+  html pre span.string,
+  body pre span.string,
+  html [class*="code"] span.string,
+  body [class*="code"] span.string,
+  html [class*="lang"]:not(body):not(a) span.string,
+  body [class*="lang"]:not(body):not(a) span.string,
+  html [class*="language"]:not(body):not(a) span.string,
+  body [class*="language"]:not(body):not(a) span.string,
+  html code span.c1,
+  body code span.c1,
+  html pre span.c1,
+  body pre span.c1,
+  html [class*="code"] span.c1,
+  body [class*="code"] span.c1,
+  html [class*="lang"]:not(body):not(a) span.c1,
+  body [class*="lang"]:not(body):not(a) span.c1,
+  html [class*="language"]:not(body):not(a) span.c1,
+  body [class*="language"]:not(body):not(a) span.c1,
+  html code span.cm,
+  body code span.cm,
+  html pre span.cm,
+  body pre span.cm,
+  html [class*="code"] span.cm,
+  body [class*="code"] span.cm,
+  html [class*="lang"]:not(body):not(a) span.cm,
+  body [class*="lang"]:not(body):not(a) span.cm,
+  html [class*="language"]:not(body):not(a) span.cm,
+  body [class*="language"]:not(body):not(a) span.cm,
+  html code span.kr,
+  body code span.kr,
+  html pre span.kr,
+  body pre span.kr,
+  html [class*="code"] span.kr,
+  body [class*="code"] span.kr,
+  html [class*="lang"]:not(body):not(a) span.kr,
+  body [class*="lang"]:not(body):not(a) span.kr,
+  html [class*="language"]:not(body):not(a) span.kr,
+  body [class*="language"]:not(body):not(a) span.kr,
+  html code span.nb,
+  body code span.nb,
+  html pre span.nb,
+  body pre span.nb,
+  html [class*="code"] span.nb,
+  body [class*="code"] span.nb,
+  html [class*="lang"]:not(body):not(a) span.nb,
+  body [class*="lang"]:not(body):not(a) span.nb,
+  html [class*="language"]:not(body):not(a) span.nb,
+  body [class*="language"]:not(body):not(a) span.nb,
+  html code span.kd,
+  body code span.kd,
+  html pre span.kd,
+  body pre span.kd,
+  html [class*="code"] span.kd,
+  body [class*="code"] span.kd,
+  html [class*="lang"]:not(body):not(a) span.kd,
+  body [class*="lang"]:not(body):not(a) span.kd,
+  html [class*="language"]:not(body):not(a) span.kd,
+  body [class*="language"]:not(body):not(a) span.kd,
+  html code span.comment,
+  body code span.comment,
+  html pre span.comment,
+  body pre span.comment,
+  html [class*="code"] span.comment,
+  body [class*="code"] span.comment,
+  html [class*="lang"]:not(body):not(a) span.comment,
+  body [class*="lang"]:not(body):not(a) span.comment,
+  html [class*="language"]:not(body):not(a) span.comment,
+  body [class*="language"]:not(body):not(a) span.comment {
+    color: var(--v4-5) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html code span.hljs-variable,
+  body code span.hljs-variable,
+  html pre span.hljs-variable,
+  body pre span.hljs-variable,
+  html [class*="code"] span.hljs-variable,
+  body [class*="code"] span.hljs-variable,
+  html [class*="lang"]:not(body):not(a) span.hljs-variable,
+  body [class*="lang"]:not(body):not(a) span.hljs-variable,
+  html [class*="language"]:not(body):not(a) span.hljs-variable,
+  body [class*="language"]:not(body):not(a) span.hljs-variable,
+  html code span.operator,
+  body code span.operator,
+  html pre span.operator,
+  body pre span.operator,
+  html [class*="code"] span.operator,
+  body [class*="code"] span.operator,
+  html [class*="lang"]:not(body):not(a) span.operator,
+  body [class*="lang"]:not(body):not(a) span.operator,
+  html [class*="language"]:not(body):not(a) span.operator,
+  body [class*="language"]:not(body):not(a) span.operator,
+  html code span.n,
+  body code span.n,
+  html pre span.n,
+  body pre span.n,
+  html [class*="code"] span.n,
+  body [class*="code"] span.n,
+  html [class*="lang"]:not(body):not(a) span.n,
+  body [class*="lang"]:not(body):not(a) span.n,
+  html [class*="language"]:not(body):not(a) span.n,
+  body [class*="language"]:not(body):not(a) span.n {
+    color: var(--v7-9) !important;
+    background: var(--bg-4) !important;
+    background-color: var(--bg-4) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html code span.hljs-tag,
+  body code span.hljs-tag,
+  html pre span.hljs-tag,
+  body pre span.hljs-tag,
+  html [class*="code"] span.hljs-tag,
+  body [class*="code"] span.hljs-tag,
+  html [class*="lang"]:not(body):not(a) span.hljs-tag,
+  body [class*="lang"]:not(body):not(a) span.hljs-tag,
+  html [class*="language"]:not(body):not(a) span.hljs-tag,
+  body [class*="language"]:not(body):not(a) span.hljs-tag {
+    color: var(--v2-7) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html code span.p,
+  body code span.p,
+  html pre span.p,
+  body pre span.p,
+  html [class*="code"] span.p,
+  body [class*="code"] span.p,
+  html [class*="lang"]:not(body):not(a) span.p,
+  body [class*="lang"]:not(body):not(a) span.p,
+  html [class*="language"]:not(body):not(a) span.p,
+  body [class*="language"]:not(body):not(a) span.p {
+    color: var(--v9-7) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html code,
+  body code,
+  html pre,
+  body pre {
+    padding: var(--pd1) var(--pd2);
+  }
+  html table,
+  body table {
+    margin: 0px auto;
+    border-spacing: 0px;
+    left: 0px;
+  }
+  html table caption,
+  body table caption {
+    margin: var(--md1);
+  }
+  html table caption,
+  body table caption,
+  html table tr,
+  body table tr,
+  html table td,
+  body table td {
+    color: var(--fg-3) !important;
+    background: var(--bg-3) !important;
+    background-color: var(--bg-3) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html table thead tr,
+  body table thead tr,
+  html table th,
+  body table th {
+    color: var(--fg-3) !important;
+    background: var(--bg-2) !important;
+    background-color: var(--bg-2) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+    text-align: center;
+    vertical-align: middle;
+  }
+  html table td,
+  body table td,
+  html table th,
+  body table th {
+    padding: var(--pd1);
+    text-align: left;
+    vertical-align: top;
+    overflow-wrap: break-word;
+    border-left: solid 0.5px var(--bg-5);
+    border-top: solid 0.5px var(--bg-5);
+  }
+  html table td:last-child,
+  body table td:last-child,
+  html table th:last-child,
+  body table th:last-child {
+    border-right: solid 0.5px var(--bg-5);
+  }
+  html table tr:last-child td,
+  body table tr:last-child td,
+  html table tr:last-child th,
+  body table tr:last-child th {
+    border-bottom: solid 0.5px var(--bg-5);
+  }
+  html table tr:first-child th:first-child,
+  body table tr:first-child th:first-child,
+  html table tr:first-child td:first-child,
+  body table tr:first-child td:first-child,
+  html table thead tr:first-child th:first-child,
+  body table thead tr:first-child th:first-child,
+  html table tbody tr:first-child td:first-child,
+  body table tbody tr:first-child td:first-child {
+    border-top-left-radius: 6px;
+  }
+  html table tr:first-child td:last-child,
+  body table tr:first-child td:last-child,
+  html table tr:first-child th:last-child,
+  body table tr:first-child th:last-child,
+  html table thead tr:first-child th:last-child,
+  body table thead tr:first-child th:last-child,
+  html table tbody tr:first-child th:last-child,
+  body table tbody tr:first-child th:last-child {
+    border-top-right-radius: 6px;
+  }
+  html table tr:last-child td:first-child,
+  body table tr:last-child td:first-child,
+  html table tr:last-child th:first-child,
+  body table tr:last-child th:first-child,
+  html table thead tr:last-child th:first-child,
+  body table thead tr:last-child th:first-child,
+  html table tbody tr:last-child td:first-child,
+  body table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 6px;
+  }
+  html table tr:last-child td:last-child,
+  body table tr:last-child td:last-child,
+  html table tr:last-child th:last-child,
+  body table tr:last-child th:last-child,
+  html table thead tr:last-child th:last-child,
+  body table thead tr:last-child th:last-child,
+  html table tbody tr:last-child td:last-child,
+  body table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 6px;
+  }
+  html h1,
+  body h1,
+  html .h1,
+  body .h1,
+  html h2,
+  body h2,
+  html .h2,
+  body .h2,
+  html h3,
+  body h3,
+  html .h3,
+  body .h3,
+  html h4,
+  body h4,
+  html .h4,
+  body .h4,
+  html h5,
+  body h5,
+  html .h5,
+  body .h5,
+  html h6,
+  body h6,
+  html .h6,
+  body .h6 {
+    color: var(--fg-3) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+    border-radius: 0px !important;
+    padding-bottom: var(--pd2);
+    line-height: 1.2em;
+  }
+  html h1,
+  body h1,
+  html .h1,
+  body .h1 {
+    font-size: 30px;
+  }
+  html h2,
+  body h2,
+  html .h2,
+  body .h2 {
+    font-size: 25px;
+  }
+  html h3,
+  body h3,
+  html .h3,
+  body .h3 {
+    font-size: 20px;
+  }
+  html h4,
+  body h4,
+  html .h4,
+  body .h4 {
+    font-size: 15px;
+  }
+  html h5,
+  body h5,
+  html .h5,
+  body .h5 {
+    font-size: 10px;
+  }
+  html h6,
+  body h6,
+  html .h6,
+  body .h6 {
+    font-size: 5px;
+  }
+  html blockquote,
+  body blockquote {
+    color: var(--fg-3) !important;
+    background: var(--bg-3) !important;
+    background-color: var(--bg-3) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html input:not([type="submit"]),
+  body input:not([type="submit"]),
+  html select,
+  body select,
+  html textarea,
+  body textarea {
+    color: var(--fg-3) !important;
+    background: var(--bg-3) !important;
+    background-color: var(--bg-3) !important;
+    border: solid 0.5px var(--bg-5) !important;
+    border-left: solid 0.5px var(--bg-5) !important;
+    border-right: solid 0.5px var(--bg-5) !important;
+    border-top: solid 0.5px var(--bg-5) !important;
+    border-bottom: solid 0.5px var(--bg-5) !important;
+    border-radius: 3px !important;
+    box-shadow: unset !important;
+  }
+  html input:not([type="submit"]):hover,
+  body input:not([type="submit"]):hover,
+  html select:hover,
+  body select:hover,
+  html textarea:hover,
+  body textarea:hover,
+  html input:not([type="submit"]):focus,
+  body input:not([type="submit"]):focus,
+  html select:focus,
+  body select:focus,
+  html textarea:focus,
+  body textarea:focus {
+    color: var(--fg-3) !important;
+    background: var(--bg-3) !important;
+    background-color: var(--bg-3) !important;
+    border: solid 0.5px var(--v7-9) !important;
+    border-left: solid 0.5px var(--v7-9) !important;
+    border-right: solid 0.5px var(--v7-9) !important;
+    border-top: solid 0.5px var(--v7-9) !important;
+    border-bottom: solid 0.5px var(--v7-9) !important;
+    border-radius: 3px !important;
+    box-shadow: unset !important;
+  }
+  html textarea,
+  body textarea {
+    min-height: 5em !important;
+  }
+  html {
+    scrollbar-color: var(--bg-5) var(--bg-1) !important;
+    scrollbar-width: thin !important;
+    scrollbar-height: thin !important;
+  }
+  html *,
+  body * {
+    scrollbar-color: #008cff var(--bg-1) !important;
+    scrollbar-width: thin !important;
+    scrollbar-height: thin !important;
+  }
+  html::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+  }
+  html::-webkit-scrollbar-thumb {
+    background: var(--bg-5) !important;
+    border-radius: 0px !important;
+    border-width: 0px !important;
+  }
+  html::-webkit-scrollbar-track {
+    background: var(--bg-1) !important;
+  }
+  ::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #008cff !important;
+    border-radius: 0px !important;
+    border-width: 0px !important;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-1) !important;
+  }
+  html footer,
+  body footer,
+  html .footer,
+  body .footer,
+  html [class*="footer"],
+  body [class*="footer"],
+  html [id*="footer"],
+  body [id*="footer"] {
+    margin: var(--md0);
+    padding: var(--pd1) var(--pd5);
+    line-height: unset !important;
+    border-width: 0px !important;
+    float: unset !important;
+    margin: auto !important;
+  }
+  html footer,
+  body footer,
+  html .footer,
+  body .footer,
+  html [class*="footer"],
+  body [class*="footer"],
+  html [id*="footer"],
+  body [id*="footer"],
+  html footer *:not(a):not(a *),
+  body footer *:not(a):not(a *),
+  html .footer *:not(a):not(a *),
+  body .footer *:not(a):not(a *),
+  html [class*="footer"] *:not(a):not(a *),
+  body [class*="footer"] *:not(a):not(a *),
+  html [id*="footer"] *:not(a):not(a *),
+  body [id*="footer"] *:not(a):not(a *) {
+    color: var(--fg-3) !important;
+    background: var(--bg-1) !important;
+    background-color: var(--bg-1) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html footer *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body footer *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  html .footer *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body .footer *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  html [class*="footer"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body [class*="footer"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  html [id*="footer"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body [id*="footer"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+    color: var(--fg-3) !important;
+    background: transparent;
+    background-color: transparent;
+    border-radius: 0px;
+    box-shadow: unset !important;
+    border-width: 0px !important;
+  }
+  html footer a,
+  body footer a,
+  html .footer a,
+  body .footer a,
+  html [class*="footer"] a,
+  body [class*="footer"] a,
+  html [id*="footer"] a,
+  body [id*="footer"] a {
+    color: #008cff !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html footer,
+  body footer,
+  html .footer,
+  body .footer,
+  html [class*="footer"],
+  body [class*="footer"],
+  html [id*="footer"],
+  body [id*="footer"],
+  html footer div,
+  body footer div,
+  html .footer div,
+  body .footer div,
+  html [class*="footer"] div,
+  body [class*="footer"] div,
+  html [id*="footer"] div,
+  body [id*="footer"] div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  html .navbar,
+  body .navbar,
+  html .navibar,
+  body .navibar,
+  html nav,
+  body nav,
+  html header,
+  body header,
+  html #header,
+  body #header {
+    min-height: 3em;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    border-top: solid 0px #008cff !important;
+    border-bottom: solid 0.5px var(--bg-5) !important;
+  }
+  html .navbar,
+  body .navbar,
+  html .navibar,
+  body .navibar,
+  html nav,
+  body nav,
+  html header,
+  body header,
+  html #header,
+  body #header,
+  html .navbar *:not(a):not(a *),
+  body .navbar *:not(a):not(a *),
+  html .navibar *:not(a):not(a *),
+  body .navibar *:not(a):not(a *),
+  html nav *:not(a):not(a *),
+  body nav *:not(a):not(a *),
+  html header *:not(a):not(a *),
+  body header *:not(a):not(a *),
+  html #header *:not(a):not(a *),
+  body #header *:not(a):not(a *) {
+    color: var(--fg-3) !important;
+    background: var(--bg-1) !important;
+    background-color: var(--bg-1) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html .navbar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body .navbar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  html .navibar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body .navibar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  html nav *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body nav *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  html header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  html #header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body #header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+    color: var(--fg-3) !important;
+    background: transparent;
+    background-color: transparent;
+    border-radius: 0px;
+    box-shadow: unset !important;
+    border-width: 0px !important;
+  }
+  html .navbar a,
+  body .navbar a,
+  html .navibar a,
+  body .navibar a,
+  html nav a,
+  body nav a,
+  html header a,
+  body header a,
+  html #header a,
+  body #header a {
+    color: #008cff !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html .navbar>.navbar,
+  body .navbar>.navbar,
+  html .navibar>.navbar,
+  body .navibar>.navbar,
+  html nav>.navbar,
+  body nav>.navbar,
+  html header>.navbar,
+  body header>.navbar,
+  html #header>.navbar,
+  body #header>.navbar,
+  html .navbar>.navibar,
+  body .navbar>.navibar,
+  html .navibar>.navibar,
+  body .navibar>.navibar,
+  html nav>.navibar,
+  body nav>.navibar,
+  html header>.navibar,
+  body header>.navibar,
+  html #header>.navibar,
+  body #header>.navibar,
+  html .navbar>nav,
+  body .navbar>nav,
+  html .navibar>nav,
+  body .navibar>nav,
+  html nav>nav,
+  body nav>nav,
+  html header>nav,
+  body header>nav,
+  html #header>nav,
+  body #header>nav,
+  html .navbar>header,
+  body .navbar>header,
+  html .navibar>header,
+  body .navibar>header,
+  html nav>header,
+  body nav>header,
+  html header>header,
+  body header>header,
+  html #header>header,
+  body #header>header,
+  html .navbar>#header,
+  body .navbar>#header,
+  html .navibar>#header,
+  body .navibar>#header,
+  html nav>#header,
+  body nav>#header,
+  html header>#header,
+  body header>#header,
+  html #header>#header,
+  body #header>#header {
+    border-bottom: solid 0px var(--bg-5) !important;
+  }
+  html div[class*="sidebar"],
+  body div[class*="sidebar"] {
+    border-right: solid 0.5px var(--bg-5) !important;
+  }
+  html div[class*="sidebar"],
+  body div[class*="sidebar"],
+  html div[class*="sidebar"] *:not(a):not(a *),
+  body div[class*="sidebar"] *:not(a):not(a *) {
+    color: var(--fg-3) !important;
+    background: var(--bg-2) !important;
+    background-color: var(--bg-2) !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html div[class*="sidebar"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+  body div[class*="sidebar"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+    color: var(--fg-3) !important;
+    background: transparent;
+    background-color: transparent;
+    border-radius: 0px;
+    box-shadow: unset !important;
+    border-width: 0px !important;
+  }
+  html div[class*="sidebar"] a,
+  body div[class*="sidebar"] a {
+    color: #008cff !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html div[class*="sidebar"] *,
+  body div[class*="sidebar"] * {
+    color: var(--fg-3) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0px;
+    box-shadow: unset !important;
+  }
+  html div[class*="sidebar"]>div[class*="sidebar"],
+  body div[class*="sidebar"]>div[class*="sidebar"] {
+    border-width: 0px !important;
+  }
+  html img[class*="logo"],
+  body img[class*="logo"] {
+    filter: invert(80%);
+  }
+  html [class*="logo"] img,
+  body [class*="logo"] img,
+  html [id*="logo"] img,
+  body [id*="logo"] img {
+    filter: invert(80%);
+  }
+  html a[class*="logo"],
+  body a[class*="logo"],
+  html a[class*="logo"] *,
+  body a[class*="logo"] * {
+    background-image: linear-gradient(45deg, var(--bg-2) 25%, transparent 25%, transparent 75%, var(--bg-2) 75%, var(--bg-2) 100%), linear-gradient(45deg, var(--bg-2) 25%, transparent 25%, transparent 75%, var(--bg-2) 75%, var(--bg-2) 100%) !important;
+  }
+  html hr,
+  body hr {
+    display: none !important;
+  }/*common part but not global part*/
+/*base styles, common styles*/
+html .search-results-list mark,
+body .search-results-list mark {
+  color: var(--bg-2) !important;
+  background: var(--v3-6) !important;
+  background-color: var(--v3-6) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html *,
+body * {
+  border-color: var(--bg-5) !important;
+  border-width: 0.5px !important;
+}
+html,
+body,
+html p,
+body p,
+html span,
+body span,
+html div,
+body div,
+html table,
+body table,
+html td,
+body td,
+html th,
+body th,
+html pre,
+body pre,
+html li,
+body li,
+html a,
+body a,
+html label,
+body label {
+  font-size: var(--font_size) !important;
+  font-family: "Ericsson Hilda", Arial, Helvetica, Sans-serif, Courier, Courier-New;
+}
+html,
+body,
+html p,
+body p,
+html div:not([class*="player"]):not([class*="over"]),
+body div:not([class*="player"]):not([class*="over"]),
+html table,
+body table,
+html td,
+body td,
+html label,
+body label,
+html li,
+body li {
+  color: var(--fg-3);
+  background: var(--bg-3);
+  background-color: var(--bg-3);
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html strong,
+body strong,
+html b,
+body b {
+  color: var(--v2-7) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html a:not([class*="button"]):not([class*="btn"]),
+body a:not([class*="button"]):not([class*="btn"]),
+html a:not([class*="button"]):not([class*="btn"]):hover,
+body a:not([class*="button"]):not([class*="btn"]):hover {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html a:not([class*="button"]):not([class*="btn"]):hover,
+body a:not([class*="button"]):not([class*="btn"]):hover,
+html a:not([class*="button"]):not([class*="btn"]):focus,
+body a:not([class*="button"]):not([class*="btn"]):focus {
+  background-color: var(--bg-2) !important;
+}
+html a:not([class*="button"]):not([class*="btn"]):-webkit-any-link,
+body a:not([class*="button"]):not([class*="btn"]):-webkit-any-link {
+  text-decoration: none !important;
+}
+html code,
+body code,
+html pre,
+body pre,
+html [class*="code"],
+body [class*="code"],
+html [class*="lang"]:not(body):not(a),
+body [class*="lang"]:not(body):not(a),
+html [class*="language"]:not(body):not(a),
+body [class*="language"]:not(body):not(a) {
+  box-shadow: unset !important;
+  text-shadow: unset !important;
+  margin: 0px;
+  margin-top: var(--md1);
+  margin-bottom: var(--md1);
+  line-height: 1.5em;
+}
+html code,
+body code,
+html pre,
+body pre,
+html [class*="code"],
+body [class*="code"],
+html [class*="lang"]:not(body):not(a),
+body [class*="lang"]:not(body):not(a),
+html [class*="language"]:not(body):not(a),
+body [class*="language"]:not(body):not(a) {
+  padding: var(--pd1);
+}
+html code,
+body code,
+html pre,
+body pre,
+html [class*="code"],
+body [class*="code"],
+html [class*="lang"]:not(body):not(a),
+body [class*="lang"]:not(body):not(a),
+html [class*="language"]:not(body):not(a),
+body [class*="language"]:not(body):not(a),
+html code>span,
+body code>span,
+html pre>span,
+body pre>span,
+html [class*="code"]>span,
+body [class*="code"]>span,
+html [class*="lang"]:not(body):not(a)>span,
+body [class*="lang"]:not(body):not(a)>span,
+html [class*="language"]:not(body):not(a)>span,
+body [class*="language"]:not(body):not(a)>span {
+  font-size: var(--code_font_size) !important;
+  font-family: courier, courier-new !important;
+  color: var(--fg-2);
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border: solid 0.5px var(--bg-5);
+  border-left: solid 0.5px var(--bg-5);
+  border-right: solid 0.5px var(--bg-5);
+  border-top: solid 0.5px var(--bg-5);
+  border-bottom: solid 0.5px var(--bg-5);
+  border-radius: 3px !important;
+  box-shadow: unset !important;
+  line-height: 1.5em;
+}
+html code [class*="linenum"],
+body code [class*="linenum"],
+html pre [class*="linenum"],
+body pre [class*="linenum"],
+html [class*="code"] [class*="linenum"],
+body [class*="code"] [class*="linenum"],
+html [class*="lang"]:not(body):not(a) [class*="linenum"],
+body [class*="lang"]:not(body):not(a) [class*="linenum"],
+html [class*="language"]:not(body):not(a) [class*="linenum"],
+body [class*="language"]:not(body):not(a) [class*="linenum"],
+html code [class*="line-num"],
+body code [class*="line-num"],
+html pre [class*="line-num"],
+body pre [class*="line-num"],
+html [class*="code"] [class*="line-num"],
+body [class*="code"] [class*="line-num"],
+html [class*="lang"]:not(body):not(a) [class*="line-num"],
+body [class*="lang"]:not(body):not(a) [class*="line-num"],
+html [class*="language"]:not(body):not(a) [class*="line-num"],
+body [class*="language"]:not(body):not(a) [class*="line-num"],
+html code [class*="line_num"],
+body code [class*="line_num"],
+html pre [class*="line_num"],
+body pre [class*="line_num"],
+html [class*="code"] [class*="line_num"],
+body [class*="code"] [class*="line_num"],
+html [class*="lang"]:not(body):not(a) [class*="line_num"],
+body [class*="lang"]:not(body):not(a) [class*="line_num"],
+html [class*="language"]:not(body):not(a) [class*="line_num"],
+body [class*="language"]:not(body):not(a) [class*="line_num"],
+html code [class*="linenum"] *,
+body code [class*="linenum"] *,
+html pre [class*="linenum"] *,
+body pre [class*="linenum"] *,
+html [class*="code"] [class*="linenum"] *,
+body [class*="code"] [class*="linenum"] *,
+html [class*="lang"]:not(body):not(a) [class*="linenum"] *,
+body [class*="lang"]:not(body):not(a) [class*="linenum"] *,
+html [class*="language"]:not(body):not(a) [class*="linenum"] *,
+body [class*="language"]:not(body):not(a) [class*="linenum"] *,
+html code [class*="line-num"] *,
+body code [class*="line-num"] *,
+html pre [class*="line-num"] *,
+body pre [class*="line-num"] *,
+html [class*="code"] [class*="line-num"] *,
+body [class*="code"] [class*="line-num"] *,
+html [class*="lang"]:not(body):not(a) [class*="line-num"] *,
+body [class*="lang"]:not(body):not(a) [class*="line-num"] *,
+html [class*="language"]:not(body):not(a) [class*="line-num"] *,
+body [class*="language"]:not(body):not(a) [class*="line-num"] *,
+html code [class*="line_num"] *,
+body code [class*="line_num"] *,
+html pre [class*="line_num"] *,
+body pre [class*="line_num"] *,
+html [class*="code"] [class*="line_num"] *,
+body [class*="code"] [class*="line_num"] *,
+html [class*="lang"]:not(body):not(a) [class*="line_num"] *,
+body [class*="lang"]:not(body):not(a) [class*="line_num"] *,
+html [class*="language"]:not(body):not(a) [class*="line_num"] *,
+body [class*="language"]:not(body):not(a) [class*="line_num"] * {
+  line-height: 1.5em;
+  font-size: var(--code_font_size) !important;
+  font-family: courier, courier-new !important;
+}
+html code>pre,
+body code>pre,
+html pre>pre,
+body pre>pre,
+html [class*="code"]>pre,
+body [class*="code"]>pre,
+html [class*="lang"]:not(body):not(a)>pre,
+body [class*="lang"]:not(body):not(a)>pre,
+html [class*="language"]:not(body):not(a)>pre,
+body [class*="language"]:not(body):not(a)>pre,
+html code>code,
+body code>code,
+html pre>code,
+body pre>code,
+html [class*="code"]>code,
+body [class*="code"]>code,
+html [class*="lang"]:not(body):not(a)>code,
+body [class*="lang"]:not(body):not(a)>code,
+html [class*="language"]:not(body):not(a)>code,
+body [class*="language"]:not(body):not(a)>code,
+html code>[class*="code"],
+body code>[class*="code"],
+html pre>[class*="code"],
+body pre>[class*="code"],
+html [class*="code"]>[class*="code"],
+body [class*="code"]>[class*="code"],
+html [class*="lang"]:not(body):not(a)>[class*="code"],
+body [class*="lang"]:not(body):not(a)>[class*="code"],
+html [class*="language"]:not(body):not(a)>[class*="code"],
+body [class*="language"]:not(body):not(a)>[class*="code"],
+html code>span,
+body code>span,
+html pre>span,
+body pre>span,
+html [class*="code"]>span,
+body [class*="code"]>span,
+html [class*="lang"]:not(body):not(a)>span,
+body [class*="lang"]:not(body):not(a)>span,
+html [class*="language"]:not(body):not(a)>span,
+body [class*="language"]:not(body):not(a)>span,
+html code>pre *,
+body code>pre *,
+html pre>pre *,
+body pre>pre *,
+html [class*="code"]>pre *,
+body [class*="code"]>pre *,
+html [class*="lang"]:not(body):not(a)>pre *,
+body [class*="lang"]:not(body):not(a)>pre *,
+html [class*="language"]:not(body):not(a)>pre *,
+body [class*="language"]:not(body):not(a)>pre *,
+html code>code *,
+body code>code *,
+html pre>code *,
+body pre>code *,
+html [class*="code"]>code *,
+body [class*="code"]>code *,
+html [class*="lang"]:not(body):not(a)>code *,
+body [class*="lang"]:not(body):not(a)>code *,
+html [class*="language"]:not(body):not(a)>code *,
+body [class*="language"]:not(body):not(a)>code *,
+html code>[class*="code"] *,
+body code>[class*="code"] *,
+html pre>[class*="code"] *,
+body pre>[class*="code"] *,
+html [class*="code"]>[class*="code"] *,
+body [class*="code"]>[class*="code"] *,
+html [class*="lang"]:not(body):not(a)>[class*="code"] *,
+body [class*="lang"]:not(body):not(a)>[class*="code"] *,
+html [class*="language"]:not(body):not(a)>[class*="code"] *,
+body [class*="language"]:not(body):not(a)>[class*="code"] *,
+html code>span *,
+body code>span *,
+html pre>span *,
+body pre>span *,
+html [class*="code"]>span *,
+body [class*="code"]>span *,
+html [class*="lang"]:not(body):not(a)>span *,
+body [class*="lang"]:not(body):not(a)>span *,
+html [class*="language"]:not(body):not(a)>span *,
+body [class*="language"]:not(body):not(a)>span * {
+  border: solid 0 var(--bg-5) !important;
+  margin: 0px !important;
+  margin-bottom: 0px !important;
+  color: var(--fg-2);
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border: solid 0.5px var(--bg-5);
+  border-left: solid 0.5px var(--bg-5);
+  border-right: solid 0.5px var(--bg-5);
+  border-top: solid 0.5px var(--bg-5);
+  border-bottom: solid 0.5px var(--bg-5);
+  border-radius: 3px !important;
+  box-shadow: unset !important;
+}
+html code span,
+body code span,
+html pre span,
+body pre span,
+html [class*="code"] span,
+body [class*="code"] span,
+html [class*="lang"]:not(body):not(a) span,
+body [class*="lang"]:not(body):not(a) span,
+html [class*="language"]:not(body):not(a) span,
+body [class*="language"]:not(body):not(a) span {
+  font-weight: 400 !important;
+}
+html code span.hljs-at_rule,
+body code span.hljs-at_rule,
+html pre span.hljs-at_rule,
+body pre span.hljs-at_rule,
+html [class*="code"] span.hljs-at_rule,
+body [class*="code"] span.hljs-at_rule,
+html [class*="lang"]:not(body):not(a) span.hljs-at_rule,
+body [class*="lang"]:not(body):not(a) span.hljs-at_rule,
+html [class*="language"]:not(body):not(a) span.hljs-at_rule,
+body [class*="language"]:not(body):not(a) span.hljs-at_rule,
+html code span.number,
+body code span.number,
+html pre span.number,
+body pre span.number,
+html [class*="code"] span.number,
+body [class*="code"] span.number,
+html [class*="lang"]:not(body):not(a) span.number,
+body [class*="lang"]:not(body):not(a) span.number,
+html [class*="language"]:not(body):not(a) span.number,
+body [class*="language"]:not(body):not(a) span.number,
+html code span.kt,
+body code span.kt,
+html pre span.kt,
+body pre span.kt,
+html [class*="code"] span.kt,
+body [class*="code"] span.kt,
+html [class*="lang"]:not(body):not(a) span.kt,
+body [class*="lang"]:not(body):not(a) span.kt,
+html [class*="language"]:not(body):not(a) span.kt,
+body [class*="language"]:not(body):not(a) span.kt,
+html code span.mi,
+body code span.mi,
+html pre span.mi,
+body pre span.mi,
+html [class*="code"] span.mi,
+body [class*="code"] span.mi,
+html [class*="lang"]:not(body):not(a) span.mi,
+body [class*="lang"]:not(body):not(a) span.mi,
+html [class*="language"]:not(body):not(a) span.mi,
+body [class*="language"]:not(body):not(a) span.mi,
+html code span.s2,
+body code span.s2,
+html pre span.s2,
+body pre span.s2,
+html [class*="code"] span.s2,
+body [class*="code"] span.s2,
+html [class*="lang"]:not(body):not(a) span.s2,
+body [class*="lang"]:not(body):not(a) span.s2,
+html [class*="language"]:not(body):not(a) span.s2,
+body [class*="language"]:not(body):not(a) span.s2,
+html code span.s,
+body code span.s,
+html pre span.s,
+body pre span.s,
+html [class*="code"] span.s,
+body [class*="code"] span.s,
+html [class*="lang"]:not(body):not(a) span.s,
+body [class*="lang"]:not(body):not(a) span.s,
+html [class*="language"]:not(body):not(a) span.s,
+body [class*="language"]:not(body):not(a) span.s,
+html code span.function,
+body code span.function,
+html pre span.function,
+body pre span.function,
+html [class*="code"] span.function,
+body [class*="code"] span.function,
+html [class*="lang"]:not(body):not(a) span.function,
+body [class*="lang"]:not(body):not(a) span.function,
+html [class*="language"]:not(body):not(a) span.function,
+body [class*="language"]:not(body):not(a) span.function,
+html code span.builtin,
+body code span.builtin,
+html pre span.builtin,
+body pre span.builtin,
+html [class*="code"] span.builtin,
+body [class*="code"] span.builtin,
+html [class*="lang"]:not(body):not(a) span.builtin,
+body [class*="lang"]:not(body):not(a) span.builtin,
+html [class*="language"]:not(body):not(a) span.builtin,
+body [class*="language"]:not(body):not(a) span.builtin {
+  color: var(--v1-9) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html code span.hljs-class,
+body code span.hljs-class,
+html pre span.hljs-class,
+body pre span.hljs-class,
+html [class*="code"] span.hljs-class,
+body [class*="code"] span.hljs-class,
+html [class*="lang"]:not(body):not(a) span.hljs-class,
+body [class*="lang"]:not(body):not(a) span.hljs-class,
+html [class*="language"]:not(body):not(a) span.hljs-class,
+body [class*="language"]:not(body):not(a) span.hljs-class,
+html code span.hljs-keyword,
+body code span.hljs-keyword,
+html pre span.hljs-keyword,
+body pre span.hljs-keyword,
+html [class*="code"] span.hljs-keyword,
+body [class*="code"] span.hljs-keyword,
+html [class*="lang"]:not(body):not(a) span.hljs-keyword,
+body [class*="lang"]:not(body):not(a) span.hljs-keyword,
+html [class*="language"]:not(body):not(a) span.hljs-keyword,
+body [class*="language"]:not(body):not(a) span.hljs-keyword,
+html code span.kn,
+body code span.kn,
+html pre span.kn,
+body pre span.kn,
+html [class*="code"] span.kn,
+body [class*="code"] span.kn,
+html [class*="lang"]:not(body):not(a) span.kn,
+body [class*="lang"]:not(body):not(a) span.kn,
+html [class*="language"]:not(body):not(a) span.kn,
+body [class*="language"]:not(body):not(a) span.kn,
+html code span.keyword,
+body code span.keyword,
+html pre span.keyword,
+body pre span.keyword,
+html [class*="code"] span.keyword,
+body [class*="code"] span.keyword,
+html [class*="lang"]:not(body):not(a) span.keyword,
+body [class*="lang"]:not(body):not(a) span.keyword,
+html [class*="language"]:not(body):not(a) span.keyword,
+body [class*="language"]:not(body):not(a) span.keyword,
+html code span.nc,
+body code span.nc,
+html pre span.nc,
+body pre span.nc,
+html [class*="code"] span.nc,
+body [class*="code"] span.nc,
+html [class*="lang"]:not(body):not(a) span.nc,
+body [class*="lang"]:not(body):not(a) span.nc,
+html [class*="language"]:not(body):not(a) span.nc,
+body [class*="language"]:not(body):not(a) span.nc,
+html code span.nf,
+body code span.nf,
+html pre span.nf,
+body pre span.nf,
+html [class*="code"] span.nf,
+body [class*="code"] span.nf,
+html [class*="lang"]:not(body):not(a) span.nf,
+body [class*="lang"]:not(body):not(a) span.nf,
+html [class*="language"]:not(body):not(a) span.nf,
+body [class*="language"]:not(body):not(a) span.nf,
+html code span.nn,
+body code span.nn,
+html pre span.nn,
+body pre span.nn,
+html [class*="code"] span.nn,
+body [class*="code"] span.nn,
+html [class*="lang"]:not(body):not(a) span.nn,
+body [class*="lang"]:not(body):not(a) span.nn,
+html [class*="language"]:not(body):not(a) span.nn,
+body [class*="language"]:not(body):not(a) span.nn,
+html code span.o,
+body code span.o,
+html pre span.o,
+body pre span.o,
+html [class*="code"] span.o,
+body [class*="code"] span.o,
+html [class*="lang"]:not(body):not(a) span.o,
+body [class*="lang"]:not(body):not(a) span.o,
+html [class*="language"]:not(body):not(a) span.o,
+body [class*="language"]:not(body):not(a) span.o {
+  color: var(--v6-9) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html code span.hljs-attributeb,
+body code span.hljs-attributeb,
+html pre span.hljs-attributeb,
+body pre span.hljs-attributeb,
+html [class*="code"] span.hljs-attributeb,
+body [class*="code"] span.hljs-attributeb,
+html [class*="lang"]:not(body):not(a) span.hljs-attributeb,
+body [class*="lang"]:not(body):not(a) span.hljs-attributeb,
+html [class*="language"]:not(body):not(a) span.hljs-attributeb,
+body [class*="language"]:not(body):not(a) span.hljs-attributeb,
+html code span.sd,
+body code span.sd,
+html pre span.sd,
+body pre span.sd,
+html [class*="code"] span.sd,
+body [class*="code"] span.sd,
+html [class*="lang"]:not(body):not(a) span.sd,
+body [class*="lang"]:not(body):not(a) span.sd,
+html [class*="language"]:not(body):not(a) span.sd,
+body [class*="language"]:not(body):not(a) span.sd,
+html code span.string,
+body code span.string,
+html pre span.string,
+body pre span.string,
+html [class*="code"] span.string,
+body [class*="code"] span.string,
+html [class*="lang"]:not(body):not(a) span.string,
+body [class*="lang"]:not(body):not(a) span.string,
+html [class*="language"]:not(body):not(a) span.string,
+body [class*="language"]:not(body):not(a) span.string,
+html code span.c1,
+body code span.c1,
+html pre span.c1,
+body pre span.c1,
+html [class*="code"] span.c1,
+body [class*="code"] span.c1,
+html [class*="lang"]:not(body):not(a) span.c1,
+body [class*="lang"]:not(body):not(a) span.c1,
+html [class*="language"]:not(body):not(a) span.c1,
+body [class*="language"]:not(body):not(a) span.c1,
+html code span.cm,
+body code span.cm,
+html pre span.cm,
+body pre span.cm,
+html [class*="code"] span.cm,
+body [class*="code"] span.cm,
+html [class*="lang"]:not(body):not(a) span.cm,
+body [class*="lang"]:not(body):not(a) span.cm,
+html [class*="language"]:not(body):not(a) span.cm,
+body [class*="language"]:not(body):not(a) span.cm,
+html code span.kr,
+body code span.kr,
+html pre span.kr,
+body pre span.kr,
+html [class*="code"] span.kr,
+body [class*="code"] span.kr,
+html [class*="lang"]:not(body):not(a) span.kr,
+body [class*="lang"]:not(body):not(a) span.kr,
+html [class*="language"]:not(body):not(a) span.kr,
+body [class*="language"]:not(body):not(a) span.kr,
+html code span.nb,
+body code span.nb,
+html pre span.nb,
+body pre span.nb,
+html [class*="code"] span.nb,
+body [class*="code"] span.nb,
+html [class*="lang"]:not(body):not(a) span.nb,
+body [class*="lang"]:not(body):not(a) span.nb,
+html [class*="language"]:not(body):not(a) span.nb,
+body [class*="language"]:not(body):not(a) span.nb,
+html code span.kd,
+body code span.kd,
+html pre span.kd,
+body pre span.kd,
+html [class*="code"] span.kd,
+body [class*="code"] span.kd,
+html [class*="lang"]:not(body):not(a) span.kd,
+body [class*="lang"]:not(body):not(a) span.kd,
+html [class*="language"]:not(body):not(a) span.kd,
+body [class*="language"]:not(body):not(a) span.kd,
+html code span.comment,
+body code span.comment,
+html pre span.comment,
+body pre span.comment,
+html [class*="code"] span.comment,
+body [class*="code"] span.comment,
+html [class*="lang"]:not(body):not(a) span.comment,
+body [class*="lang"]:not(body):not(a) span.comment,
+html [class*="language"]:not(body):not(a) span.comment,
+body [class*="language"]:not(body):not(a) span.comment {
+  color: var(--v4-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html code span.hljs-variable,
+body code span.hljs-variable,
+html pre span.hljs-variable,
+body pre span.hljs-variable,
+html [class*="code"] span.hljs-variable,
+body [class*="code"] span.hljs-variable,
+html [class*="lang"]:not(body):not(a) span.hljs-variable,
+body [class*="lang"]:not(body):not(a) span.hljs-variable,
+html [class*="language"]:not(body):not(a) span.hljs-variable,
+body [class*="language"]:not(body):not(a) span.hljs-variable,
+html code span.operator,
+body code span.operator,
+html pre span.operator,
+body pre span.operator,
+html [class*="code"] span.operator,
+body [class*="code"] span.operator,
+html [class*="lang"]:not(body):not(a) span.operator,
+body [class*="lang"]:not(body):not(a) span.operator,
+html [class*="language"]:not(body):not(a) span.operator,
+body [class*="language"]:not(body):not(a) span.operator,
+html code span.n,
+body code span.n,
+html pre span.n,
+body pre span.n,
+html [class*="code"] span.n,
+body [class*="code"] span.n,
+html [class*="lang"]:not(body):not(a) span.n,
+body [class*="lang"]:not(body):not(a) span.n,
+html [class*="language"]:not(body):not(a) span.n,
+body [class*="language"]:not(body):not(a) span.n {
+  color: var(--v7-9) !important;
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html code span.hljs-tag,
+body code span.hljs-tag,
+html pre span.hljs-tag,
+body pre span.hljs-tag,
+html [class*="code"] span.hljs-tag,
+body [class*="code"] span.hljs-tag,
+html [class*="lang"]:not(body):not(a) span.hljs-tag,
+body [class*="lang"]:not(body):not(a) span.hljs-tag,
+html [class*="language"]:not(body):not(a) span.hljs-tag,
+body [class*="language"]:not(body):not(a) span.hljs-tag {
+  color: var(--v2-7) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html code span.p,
+body code span.p,
+html pre span.p,
+body pre span.p,
+html [class*="code"] span.p,
+body [class*="code"] span.p,
+html [class*="lang"]:not(body):not(a) span.p,
+body [class*="lang"]:not(body):not(a) span.p,
+html [class*="language"]:not(body):not(a) span.p,
+body [class*="language"]:not(body):not(a) span.p {
+  color: var(--v9-7) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html code,
+body code,
+html pre,
+body pre {
+  padding: var(--pd1) var(--pd2);
+}
+html table,
+body table {
+  margin: 0px auto;
+  border-spacing: 0px;
+  left: 0px;
+}
+html table caption,
+body table caption {
+  margin: var(--md1);
+}
+html table caption,
+body table caption,
+html table tr,
+body table tr,
+html table td,
+body table td {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html table thead tr,
+body table thead tr,
+html table th,
+body table th {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  text-align: center;
+  vertical-align: middle;
+}
+html table td,
+body table td,
+html table th,
+body table th {
+  padding: var(--pd1);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: break-word;
+  border-left: solid 0.5px var(--bg-5);
+  border-top: solid 0.5px var(--bg-5);
+}
+html table td:last-child,
+body table td:last-child,
+html table th:last-child,
+body table th:last-child {
+  border-right: solid 0.5px var(--bg-5);
+}
+html table tr:last-child td,
+body table tr:last-child td,
+html table tr:last-child th,
+body table tr:last-child th {
+  border-bottom: solid 0.5px var(--bg-5);
+}
+html table tr:first-child th:first-child,
+body table tr:first-child th:first-child,
+html table tr:first-child td:first-child,
+body table tr:first-child td:first-child,
+html table thead tr:first-child th:first-child,
+body table thead tr:first-child th:first-child,
+html table tbody tr:first-child td:first-child,
+body table tbody tr:first-child td:first-child {
+  border-top-left-radius: 6px;
+}
+html table tr:first-child td:last-child,
+body table tr:first-child td:last-child,
+html table tr:first-child th:last-child,
+body table tr:first-child th:last-child,
+html table thead tr:first-child th:last-child,
+body table thead tr:first-child th:last-child,
+html table tbody tr:first-child th:last-child,
+body table tbody tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+}
+html table tr:last-child td:first-child,
+body table tr:last-child td:first-child,
+html table tr:last-child th:first-child,
+body table tr:last-child th:first-child,
+html table thead tr:last-child th:first-child,
+body table thead tr:last-child th:first-child,
+html table tbody tr:last-child td:first-child,
+body table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+html table tr:last-child td:last-child,
+body table tr:last-child td:last-child,
+html table tr:last-child th:last-child,
+body table tr:last-child th:last-child,
+html table thead tr:last-child th:last-child,
+body table thead tr:last-child th:last-child,
+html table tbody tr:last-child td:last-child,
+body table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+html h1,
+body h1,
+html .h1,
+body .h1,
+html h2,
+body h2,
+html .h2,
+body .h2,
+html h3,
+body h3,
+html .h3,
+body .h3,
+html h4,
+body h4,
+html .h4,
+body .h4,
+html h5,
+body h5,
+html .h5,
+body .h5,
+html h6,
+body h6,
+html .h6,
+body .h6 {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-radius: 0px !important;
+  padding-bottom: var(--pd2);
+  line-height: 1.2em;
+}
+html h1,
+body h1,
+html .h1,
+body .h1 {
+  font-size: 30px;
+}
+html h2,
+body h2,
+html .h2,
+body .h2 {
+  font-size: 25px;
+}
+html h3,
+body h3,
+html .h3,
+body .h3 {
+  font-size: 20px;
+}
+html h4,
+body h4,
+html .h4,
+body .h4 {
+  font-size: 15px;
+}
+html h5,
+body h5,
+html .h5,
+body .h5 {
+  font-size: 10px;
+}
+html h6,
+body h6,
+html .h6,
+body .h6 {
+  font-size: 5px;
+}
+html blockquote,
+body blockquote {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html input:not([type="submit"]),
+body input:not([type="submit"]),
+html select,
+body select,
+html textarea,
+body textarea {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 3px !important;
+  box-shadow: unset !important;
+}
+html input:not([type="submit"]):hover,
+body input:not([type="submit"]):hover,
+html select:hover,
+body select:hover,
+html textarea:hover,
+body textarea:hover,
+html input:not([type="submit"]):focus,
+body input:not([type="submit"]):focus,
+html select:focus,
+body select:focus,
+html textarea:focus,
+body textarea:focus {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--v7-9) !important;
+  border-left: solid 0.5px var(--v7-9) !important;
+  border-right: solid 0.5px var(--v7-9) !important;
+  border-top: solid 0.5px var(--v7-9) !important;
+  border-bottom: solid 0.5px var(--v7-9) !important;
+  border-radius: 3px !important;
+  box-shadow: unset !important;
+}
+html textarea,
+body textarea {
+  min-height: 5em !important;
+}
+html {
+  scrollbar-color: var(--bg-5) var(--bg-1) !important;
+  scrollbar-width: thin !important;
+  scrollbar-height: thin !important;
+}
+html *,
+body * {
+  scrollbar-color: #008cff var(--bg-1) !important;
+  scrollbar-width: thin !important;
+  scrollbar-height: thin !important;
+}
+html::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+html::-webkit-scrollbar-thumb {
+  background: var(--bg-5) !important;
+  border-radius: 0px !important;
+  border-width: 0px !important;
+}
+html::-webkit-scrollbar-track {
+  background: var(--bg-1) !important;
+}
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+::-webkit-scrollbar-thumb {
+  background: #008cff !important;
+  border-radius: 0px !important;
+  border-width: 0px !important;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-1) !important;
+}
+html footer,
+body footer,
+html .footer,
+body .footer,
+html [class*="footer"],
+body [class*="footer"],
+html [id*="footer"],
+body [id*="footer"] {
+  margin: var(--md0);
+  padding: var(--pd1) var(--pd5);
+  line-height: unset !important;
+  border-width: 0px !important;
+  float: unset !important;
+  margin: auto !important;
+}
+html footer,
+body footer,
+html .footer,
+body .footer,
+html [class*="footer"],
+body [class*="footer"],
+html [id*="footer"],
+body [id*="footer"],
+html footer *:not(a):not(a *),
+body footer *:not(a):not(a *),
+html .footer *:not(a):not(a *),
+body .footer *:not(a):not(a *),
+html [class*="footer"] *:not(a):not(a *),
+body [class*="footer"] *:not(a):not(a *),
+html [id*="footer"] *:not(a):not(a *),
+body [id*="footer"] *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html footer *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body footer *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+html .footer *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body .footer *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+html [class*="footer"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body [class*="footer"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+html [id*="footer"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body [id*="footer"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+html footer a,
+body footer a,
+html .footer a,
+body .footer a,
+html [class*="footer"] a,
+body [class*="footer"] a,
+html [id*="footer"] a,
+body [id*="footer"] a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html footer,
+body footer,
+html .footer,
+body .footer,
+html [class*="footer"],
+body [class*="footer"],
+html [id*="footer"],
+body [id*="footer"],
+html footer div,
+body footer div,
+html .footer div,
+body .footer div,
+html [class*="footer"] div,
+body [class*="footer"] div,
+html [id*="footer"] div,
+body [id*="footer"] div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+html .navbar,
+body .navbar,
+html .navibar,
+body .navibar,
+html nav,
+body nav,
+html header,
+body header,
+html #header,
+body #header {
+  min-height: 3em;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  border-top: solid 0px #008cff !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+}
+html .navbar,
+body .navbar,
+html .navibar,
+body .navibar,
+html nav,
+body nav,
+html header,
+body header,
+html #header,
+body #header,
+html .navbar *:not(a):not(a *),
+body .navbar *:not(a):not(a *),
+html .navibar *:not(a):not(a *),
+body .navibar *:not(a):not(a *),
+html nav *:not(a):not(a *),
+body nav *:not(a):not(a *),
+html header *:not(a):not(a *),
+body header *:not(a):not(a *),
+html #header *:not(a):not(a *),
+body #header *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html .navbar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body .navbar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+html .navibar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body .navibar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+html nav *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body nav *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+html header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+html #header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body #header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+html .navbar a,
+body .navbar a,
+html .navibar a,
+body .navibar a,
+html nav a,
+body nav a,
+html header a,
+body header a,
+html #header a,
+body #header a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html .navbar>.navbar,
+body .navbar>.navbar,
+html .navibar>.navbar,
+body .navibar>.navbar,
+html nav>.navbar,
+body nav>.navbar,
+html header>.navbar,
+body header>.navbar,
+html #header>.navbar,
+body #header>.navbar,
+html .navbar>.navibar,
+body .navbar>.navibar,
+html .navibar>.navibar,
+body .navibar>.navibar,
+html nav>.navibar,
+body nav>.navibar,
+html header>.navibar,
+body header>.navibar,
+html #header>.navibar,
+body #header>.navibar,
+html .navbar>nav,
+body .navbar>nav,
+html .navibar>nav,
+body .navibar>nav,
+html nav>nav,
+body nav>nav,
+html header>nav,
+body header>nav,
+html #header>nav,
+body #header>nav,
+html .navbar>header,
+body .navbar>header,
+html .navibar>header,
+body .navibar>header,
+html nav>header,
+body nav>header,
+html header>header,
+body header>header,
+html #header>header,
+body #header>header,
+html .navbar>#header,
+body .navbar>#header,
+html .navibar>#header,
+body .navibar>#header,
+html nav>#header,
+body nav>#header,
+html header>#header,
+body header>#header,
+html #header>#header,
+body #header>#header {
+  border-bottom: solid 0px var(--bg-5) !important;
+}
+html div[class*="sidebar"],
+body div[class*="sidebar"] {
+  border-right: solid 0.5px var(--bg-5) !important;
+}
+html div[class*="sidebar"],
+body div[class*="sidebar"],
+html div[class*="sidebar"] *:not(a):not(a *),
+body div[class*="sidebar"] *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html div[class*="sidebar"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body div[class*="sidebar"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+html div[class*="sidebar"] a,
+body div[class*="sidebar"] a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html div[class*="sidebar"] *,
+body div[class*="sidebar"] * {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+html div[class*="sidebar"]>div[class*="sidebar"],
+body div[class*="sidebar"]>div[class*="sidebar"] {
+  border-width: 0px !important;
+}
+html img[class*="logo"],
+body img[class*="logo"] {
+  filter: invert(80%);
+}
+html [class*="logo"] img,
+body [class*="logo"] img,
+html [id*="logo"] img,
+body [id*="logo"] img {
+  filter: invert(80%);
+}
+html a[class*="logo"],
+body a[class*="logo"],
+html a[class*="logo"] *,
+body a[class*="logo"] * {
+  background-image: linear-gradient(45deg, var(--bg-2) 25%, transparent 25%, transparent 75%, var(--bg-2) 75%, var(--bg-2) 100%), linear-gradient(45deg, var(--bg-2) 25%, transparent 25%, transparent 75%, var(--bg-2) 75%, var(--bg-2) 100%) !important;
+}
+html hr,
+body hr {
+  display: none !important;
+}
+/*domain wikipedia.org*/
+body.en_wikipedia,
+body.en_wikipedia input,
+body.en_wikipedia textarea,
+body.en_wikipedia p,
+body.en_wikipedia #mw-page-base,
+body.en_wikipedia #mw-head-base {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #mw-page-base,
+body.en_wikipedia #mw-head-base {
+  height: 3em !important;
+}
+body.en_wikipedia #mw-page-base,
+body.en_wikipedia #mw-head-base {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+  line-height: unset !important;
+  float: unset !important;
+}
+body.en_wikipedia #mw-page-base,
+body.en_wikipedia #mw-head-base,
+body.en_wikipedia #mw-page-base *:not(a):not(a *),
+body.en_wikipedia #mw-head-base *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #mw-page-base *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body.en_wikipedia #mw-head-base *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.en_wikipedia #mw-page-base a,
+body.en_wikipedia #mw-head-base a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #mw-page-base>body.en_wikipedia #mw-page-base,
+body.en_wikipedia #mw-head-base>body.en_wikipedia #mw-head-base {
+  border-bottom: solid 0px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.en_wikipedia #mw-page-base,
+body.en_wikipedia #mw-head-base {
+  width: 100% !important;
+  min-height: 3em !important;
+  position: fixed !important;
+  top: 0px !important;
+  z-index: 1 !important;
+  display: inline;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.en_wikipedia #mw-page-base *:not(input[type="search"]),
+body.en_wikipedia #mw-head-base *:not(input[type="search"]) {
+  padding: 0px !important;
+}
+body.en_wikipedia #mw-navigation {
+  position: static;
+/*left menus - width: 150px*/
+}
+body.en_wikipedia #mw-navigation #right-navigation,
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+  line-height: unset !important;
+  float: unset !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation,
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box,
+body.en_wikipedia #mw-navigation #right-navigation *:not(a):not(a *),
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation a,
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation>body.en_wikipedia #mw-navigation #right-navigation,
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box>body.en_wikipedia #mw-navigation #right-navigation .vector-search-box {
+  border-bottom: solid 0px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation,
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box {
+  width: 100% !important;
+  min-height: 3em !important;
+  position: fixed !important;
+  top: 0px !important;
+  z-index: 1 !important;
+  display: inline;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation *:not(input[type="search"]),
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box *:not(input[type="search"]) {
+  padding: 0px !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation,
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation *,
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box * {
+  margin: 0px !important;
+  float: unset !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation>nav {
+  width: auto !important;
+}
+body.en_wikipedia #mw-navigation #right-navigation .vector-search-box input.vector-search-box-input {
+  padding: var(--pd2) !important;
+}
+body.en_wikipedia #mw-navigation #mw-panel {
+  top: 4em !important;
+  width: 180px;
+}
+body.en_wikipedia #mw-navigation #mw-panel #p-logo {
+  display: none !important;
+}
+body.en_wikipedia #mw-navigation #mw-panel {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 6px !important;
+  box-shadow: unset !important;
+  margin: 0px var(--md1) !important;
+}
+body.en_wikipedia #mw-navigation #mw-panel *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #mw-navigation #mw-panel a,
+body.en_wikipedia #mw-navigation #mw-panel li,
+body.en_wikipedia #mw-navigation #mw-panel nav {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.en_wikipedia .suggestions {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia .suggestions-results,
+body.en_wikipedia .suggestions-special {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border: solid 0.5px var(--v7-9) !important;
+  border-left: solid 0.5px var(--v7-9) !important;
+  border-right: solid 0.5px var(--v7-9) !important;
+  border-top: solid 0.5px var(--v7-9) !important;
+  border-bottom: solid 0.5px var(--v7-9) !important;
+  border-radius: 6px !important;
+  box-shadow: unset !important;
+  margin-top: var(--md1);
+}
+body.en_wikipedia .suggestions-results *,
+body.en_wikipedia .suggestions-special * {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia .suggestions-results a,
+body.en_wikipedia .suggestions-special a {
+  color: #008cff !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia .suggestions-results a:hover,
+body.en_wikipedia .suggestions-special a:hover {
+  color: #008cff !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #content {
+  border-width: 0px !important;
+  padding: 0px var(--pd6) var(--pd6) var(--pd6) !important;
+  top: 4em;
+  position: relative;
+  margin-left: 192px;
+  margin-top: 0px !important;
+/*tables*/
+/*navigator of relative information which locates at the bottom of main body of wiki entry*/
+}
+body.en_wikipedia #content .tocnumber {
+  color: var(--fg-3) !important;
+}
+body.en_wikipedia #content table {
+  border-collapse: separate;
+  margin-bottom: var(--md2);
+}
+body.en_wikipedia #content table,
+body.en_wikipedia #content table caption {
+  border-width: 0px !important;
+}
+body.en_wikipedia #content #siteNotice,
+body.en_wikipedia #content #siteNotice * {
+  border-width: 0px !important;
+}
+body.en_wikipedia #content .toctitle,
+body.en_wikipedia #content .mp-h2,
+body.en_wikipedia #content .navbox {
+  border-width: 0 !important;
+}
+body.en_wikipedia #content .toc,
+body.en_wikipedia #content .toctitle,
+body.en_wikipedia #content .mw-parser-output #mp-topbanner,
+body.en_wikipedia #content .mw-parser-output #mp-left,
+body.en_wikipedia #content .mw-parser-output #mp-right,
+body.en_wikipedia #content .mp-bordered,
+body.en_wikipedia #content .catlinks,
+body.en_wikipedia #content .mw-parser-output #mp-2012-column-right-block-a,
+body.en_wikipedia #content .mw-parser-output #mp-2012-column-right-block-b {
+  border: solid 0.5px var(--bg-5) !important;
+  border-radius: 6px !important;
+  margin-bottom: var(--md2);
+}
+body.en_wikipedia #content .toc,
+body.en_wikipedia #content .toctitle,
+body.en_wikipedia #content .mw-parser-output #mp-topbanner,
+body.en_wikipedia #content .mw-parser-output #mp-left,
+body.en_wikipedia #content .mw-parser-output #mp-right,
+body.en_wikipedia #content .mp-bordered,
+body.en_wikipedia #content .catlinks,
+body.en_wikipedia #content .mw-parser-output #mp-2012-column-right-block-a,
+body.en_wikipedia #content .mw-parser-output #mp-2012-column-right-block-b {
+  color: var(--fg-3) !important;
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #content .toc *,
+body.en_wikipedia #content .toctitle *,
+body.en_wikipedia #content .mw-parser-output #mp-topbanner *,
+body.en_wikipedia #content .mw-parser-output #mp-left *,
+body.en_wikipedia #content .mw-parser-output #mp-right *,
+body.en_wikipedia #content .mp-bordered *,
+body.en_wikipedia #content .catlinks *,
+body.en_wikipedia #content .mw-parser-output #mp-2012-column-right-block-a *,
+body.en_wikipedia #content .mw-parser-output #mp-2012-column-right-block-b * {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0 !important;
+}
+body.en_wikipedia #content .catlinks,
+body.en_wikipedia #content #catlinks {
+  text-align: center;
+}
+body.en_wikipedia #content .mid-table {
+  border-width: 0px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #content table.infobox,
+body.en_wikipedia #content table.vevent,
+body.en_wikipedia #content table.wikitable,
+body.en_wikipedia #content table.sidebar,
+body.en_wikipedia #content table.mbox-small,
+body.en_wikipedia #content table.ambox {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0 !important;
+  border-spacing: 0 !important;
+}
+body.en_wikipedia #content .mbox-small {
+  border-width: 0 !important;
+}
+body.en_wikipedia #content .mbox-small td {
+  border-left: solid 0.5px var(--bg-5);
+  border-top: solid 0.5px var(--bg-5);
+}
+body.en_wikipedia #content .infobox-below {
+  border-top: solid var(--bg-5) 0.5px !important;
+}
+body.en_wikipedia #content .navbox th,
+body.en_wikipedia #content .navbox .navbox-inner th,
+body.en_wikipedia #content .navbox .navbox-subgroup th,
+.toccolours th,
+.wikitable th {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia #content .navbox tr th,
+body.en_wikipedia #content .navbox .navbox-inner tr th,
+body.en_wikipedia #content .navbox .navbox-subgroup tr th,
+.toccolours tr th,
+.wikitable tr th,
+body.en_wikipedia #content .navbox tr td,
+body.en_wikipedia #content .navbox .navbox-inner tr td,
+body.en_wikipedia #content .navbox .navbox-subgroup tr td,
+.toccolours tr td,
+.wikitable tr td {
+  border-left: solid 0.5px var(--bg-5);
+  border-top: solid 0.5px var(--bg-5);
+  border-right: solid 0px var(--bg-5) !important;
+  border-bottom: solid 0px var(--bg-5) !important;
+}
+body.en_wikipedia #content .navbox thead tr:first-child th,
+body.en_wikipedia #content .navbox .navbox-inner thead tr:first-child th,
+body.en_wikipedia #content .navbox .navbox-subgroup thead tr:first-child th,
+.toccolours thead tr:first-child th,
+.wikitable thead tr:first-child th {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+body.en_wikipedia #content .navbox tbody tr:first-child td,
+body.en_wikipedia #content .navbox .navbox-inner tbody tr:first-child td,
+body.en_wikipedia #content .navbox .navbox-subgroup tbody tr:first-child td,
+.toccolours tbody tr:first-child td,
+.wikitable tbody tr:first-child td {
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-top: solid 0px var(--bg-5);
+}
+body.en_wikipedia #content .navbox tr:last-child th,
+body.en_wikipedia #content .navbox .navbox-inner tr:last-child th,
+body.en_wikipedia #content .navbox .navbox-subgroup tr:last-child th,
+.toccolours tr:last-child th,
+.wikitable tr:last-child th,
+body.en_wikipedia #content .navbox tr:last-child td,
+body.en_wikipedia #content .navbox .navbox-inner tr:last-child td,
+body.en_wikipedia #content .navbox .navbox-subgroup tr:last-child td,
+.toccolours tr:last-child td,
+.wikitable tr:last-child td {
+  border-bottom: solid 0.5px var(--bg-5) !important;
+}
+body.en_wikipedia #content .navbox td:last-child,
+body.en_wikipedia #content .navbox .navbox-inner td:last-child,
+body.en_wikipedia #content .navbox .navbox-subgroup td:last-child,
+.toccolours td:last-child,
+.wikitable td:last-child,
+body.en_wikipedia #content .navbox th:last-child,
+body.en_wikipedia #content .navbox .navbox-inner th:last-child,
+body.en_wikipedia #content .navbox .navbox-subgroup th:last-child,
+.toccolours th:last-child,
+.wikitable th:last-child {
+  border-right: solid 0.5px var(--bg-5) !important;
+}
+body.en_wikipedia #content .navbox .navbox-subgroup {
+  margin: var(--md1);
+  width: 99.6%;
+}
+body.en_wikipedia #content .navbox div,
+body.en_wikipedia #content .navbox .navbar,
+body.en_wikipedia #content .navbox div *,
+body.en_wikipedia #content .navbox .navbar * {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.en_wikipedia img.mwe-math-fallback-image-display,
+body.en_wikipedia img.mwe-math-fallback-image-inline,
+body.en_wikipedia img.mw-ext-score,
+body.en_wikipedia img.central-textlogo__image,
+body.en_wikipedia img.main-footer-menuToggle {
+  filter: invert(80%);
+}
+body.en_wikipedia .vector-menu-tabs,
+body.en_wikipedia #mw-head .vector-menu-dropdown {
+  background-image: unset !important;
+}
+body.en_wikipedia .vector-menu-tabs li,
+body.en_wikipedia #mw-head .vector-menu-dropdown li,
+body.en_wikipedia .vector-menu-tabs .selected,
+body.en_wikipedia #mw-head .vector-menu-dropdown .selected {
+  background-color: var(--bg-3);
+  background: var(--bg-3);
+}
+body.en_wikipedia .vector-menu-tabs .selected,
+body.en_wikipedia #mw-head .vector-menu-dropdown .selected {
+  border-bottom: solid 0.5px var(--v2-7);
+  border-radius: 0px !important;
+}
+body.en_wikipedia .vector-menu-tabs a,
+body.en_wikipedia #mw-head .vector-menu-dropdown a,
+body.en_wikipedia .vector-menu-tabs h3,
+body.en_wikipedia #mw-head .vector-menu-dropdown h3,
+body.en_wikipedia .vector-menu-tabs a:hover,
+body.en_wikipedia #mw-head .vector-menu-dropdown a:hover,
+body.en_wikipedia .vector-menu-tabs h3:hover,
+body.en_wikipedia #mw-head .vector-menu-dropdown h3:hover,
+body.en_wikipedia .vector-menu-tabs a:visited,
+body.en_wikipedia #mw-head .vector-menu-dropdown a:visited,
+body.en_wikipedia .vector-menu-tabs h3:visited,
+body.en_wikipedia #mw-head .vector-menu-dropdown h3:visited {
+  color: #008cff;
+  background-image: unset !important;
+}
+body.en_wikipedia #p-namespaces {
+  margin-left: 45px;
+}
+body.en_wikipedia #ca-view {
+  margin-left: 2px;
+}
+body.en_wikipedia .searchButton[name='go'],
+body.en_wikipedia .searchButton,
+body.en_wikipedia .mw-footer,
+body.en_wikipedia #ca-talk,
+body.en_wikipedia #ca-view,
+body.en_wikipedia #ca-unwatch,
+body.en_wikipedia #ca-watch,
+body.en_wikipedia #p-personal,
+body.en_wikipedia #ca-viewsource,
+body.en_wikipedia #ca-history,
+body.en_wikipedia #p-cactions,
+body.en_wikipedia #ca-edit,
+body.en_wikipedia #ca-nstab-main,
+body.en_wikipedia #left-navigation,
+body.en_wikipedia .after-portlet,
+body.en_wikipedia .mw-notification-area-overlay {
+  display: none;
+}
+/*lesscss.org*/
+body.index,
+body.functions,
+body.features,
+body.tools,
+body.usage,
+body.index div,
+body.functions div,
+body.features div,
+body.tools div,
+body.usage div,
+body.index input,
+body.functions input,
+body.features input,
+body.tools input,
+body.usage input,
+body.index textarea,
+body.functions textarea,
+body.features textarea,
+body.tools textarea,
+body.usage textarea,
+body.index .sidenav,
+body.functions .sidenav,
+body.features .sidenav,
+body.tools .sidenav,
+body.usage .sidenav,
+body.index .docs-header,
+body.functions .docs-header,
+body.features .docs-header,
+body.tools .docs-header,
+body.usage .docs-header,
+body.index .docs-home,
+body.functions .docs-home,
+body.features .docs-home,
+body.tools .docs-home,
+body.usage .docs-home,
+body.index .banner,
+body.functions .banner,
+body.features .banner,
+body.tools .banner,
+body.usage .banner {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.index .docs-nav,
+body.functions .docs-nav,
+body.features .docs-nav,
+body.tools .docs-nav,
+body.usage .docs-nav,
+body.index .docs-nav div,
+body.functions .docs-nav div,
+body.features .docs-nav div,
+body.tools .docs-nav div,
+body.usage .docs-nav div {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.index .banner,
+body.functions .banner,
+body.features .banner,
+body.tools .banner,
+body.usage .banner {
+  border-top: solid var(--bdw) var(--bg-5);
+  border-bottom: solid var(--bdw) var(--bg-5);
+}
+body.index .docs-content,
+body.functions .docs-content,
+body.features .docs-content,
+body.tools .docs-content,
+body.usage .docs-content {
+  border-left: solid var(--bdw) var(--bg-5);
+  border-radius: 0px !important;
+}
+body.index .docs-section table,
+body.functions .docs-section table,
+body.features .docs-section table,
+body.tools .docs-section table,
+body.usage .docs-section table {
+  margin-bottom: 0px;
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.index .docs-section table *,
+body.functions .docs-section table *,
+body.features .docs-section table *,
+body.tools .docs-section table *,
+body.usage .docs-section table * {
+  background-color: var(--bg-4) !important;
+}
+body.index .docs-section table code,
+body.functions .docs-section table code,
+body.features .docs-section table code,
+body.tools .docs-section table code,
+body.usage .docs-section table code {
+  border: solid 0px var(--bg-5) !important;
+}
+body.index .container,
+body.functions .container,
+body.features .container,
+body.tools .container,
+body.usage .container {
+  width: 95%;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-top: 0px !important;
+}
+body.index .sidenav,
+body.functions .sidenav,
+body.features .sidenav,
+body.tools .sidenav,
+body.usage .sidenav {
+  text-shadow: unset !important;
+}
+body.index .sidebar,
+body.functions .sidebar,
+body.features .sidebar,
+body.tools .sidebar,
+body.usage .sidebar {
+  top: 50px !important;
+  margin: var(--md1) !important;
+  max-height: 500px !important;
+  padding-right: var(--pd3);
+}
+body.index .sidebar .nav a:hover,
+body.functions .sidebar .nav a:hover,
+body.features .sidebar .nav a:hover,
+body.tools .sidebar .nav a:hover,
+body.usage .sidebar .nav a:hover,
+body.index .sidebar .nav a:focus,
+body.functions .sidebar .nav a:focus,
+body.features .sidebar .nav a:focus,
+body.tools .sidebar .nav a:focus,
+body.usage .sidebar .nav a:focus {
+  border-left: solid 0.5px #008cff;
+  border-right: solid 0px var(--v2-7) !important;
+  border-radius: 0px !important;
+}
+body.index .sidebar .nav .active a,
+body.functions .sidebar .nav .active a,
+body.features .sidebar .nav .active a,
+body.tools .sidebar .nav .active a,
+body.usage .sidebar .nav .active a,
+body.index .sidebar .nav .active a:hover,
+body.functions .sidebar .nav .active a:hover,
+body.features .sidebar .nav .active a:hover,
+body.tools .sidebar .nav .active a:hover,
+body.usage .sidebar .nav .active a:hover,
+body.index .sidebar .nav .active a:focus,
+body.functions .sidebar .nav .active a:focus,
+body.features .sidebar .nav .active a:focus,
+body.tools .sidebar .nav .active a:focus,
+body.usage .sidebar .nav .active a:focus {
+  border-left: solid 0px var(--v2-7);
+  border-right: solid 0px var(--v2-7) !important;
+}
+body.index .section-content,
+body.functions .section-content,
+body.features .section-content,
+body.tools .section-content,
+body.usage .section-content {
+  background-color: var(--bg-4);
+}
+body.index .section-content table td,
+body.functions .section-content table td,
+body.features .section-content table td,
+body.tools .section-content table td,
+body.usage .section-content table td {
+  background-color: transparent !important;
+  border: solid 0px var(--bg-5);
+  border-top: solid 0px var(--bg-5);
+  border-bottom: solid 0px var(--bg-5);
+  border-left: solid 0px var(--bg-5);
+  border-right: solid 0px var(--bg-5);
+  padding-top: var(--padding_8);
+  padding-bottom: var(--padding_8);
+}
+body.index .section-content table td:first-child,
+body.functions .section-content table td:first-child,
+body.features .section-content table td:first-child,
+body.tools .section-content table td:first-child,
+body.usage .section-content table td:first-child {
+  padding-left: var(--padding_10);
+}
+body.index .section-content table tr:last-child td,
+body.functions .section-content table tr:last-child td,
+body.features .section-content table tr:last-child td,
+body.tools .section-content table tr:last-child td,
+body.usage .section-content table tr:last-child td {
+  border-bottom: solid 0px var(--bg-5) !important;
+}
+body.index .bs-social,
+body.functions .bs-social,
+body.features .bs-social,
+body.tools .bs-social,
+body.usage .bs-social,
+body.index .section-content table thead,
+body.functions .section-content table thead,
+body.features .section-content table thead,
+body.tools .section-content table thead,
+body.usage .section-content table thead {
+  display: none;
+}
+/*https://grafana.com/docs*/
+body.section-docs a {
+  font-size: var(--font_size) !important;
+}
+body.section-docs .mega-menu,
+body.section-docs .consent-footer,
+body.section-docs .mega-fgsb,
+body.section-docs .mega-menu__main {
+  min-height: 3em;
+  height: 3em;
+}
+body.section-docs .mega-menu,
+body.section-docs .consent-footer,
+body.section-docs .mega-fgsb,
+body.section-docs .mega-menu__main,
+body.section-docs .mega-menu *:not(a),
+body.section-docs .consent-footer *:not(a),
+body.section-docs .mega-fgsb *:not(a),
+body.section-docs .mega-menu__main *:not(a) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.section-docs .page-submenu,
+body.section-docs .page-footer,
+body.section-docs .page-submenu *,
+body.section-docs .page-footer * {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.section-docs .docs-menu,
+body.section-docs .docs-menu ul {
+  border-left: solid 0.5px var(--bg-5) !important;
+}
+body.section-docs .docs-menu button {
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.section-docs .docs-menu li {
+  padding-left: var(--pd1);
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px !important;
+}
+body.section-docs .docs-menu li[class*='active'] {
+  border-left: solid 0.5px #008cff !important;
+  border-radius: 0px !important;
+}
+body.section-docs .docs-menu li[class*='current'] {
+  border-left: solid 0.5px var(--v2-7) !important;
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-radius: 0px !important;
+}
+body.section-docs .input-white,
+body.section-docs .input-border,
+body.section-docs .docs-toc,
+body.section-docs input,
+body.section-docs select,
+body.section-docs .btn--outline-white,
+body.section-docs blockquote {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.section-docs .docs-wrapper {
+  max-width: 95%;
+}
+body.section-docs pre:not([class*=language-]) {
+  color: var(--fg-2) !important;
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.section-docs code:not([class*=language-]) {
+  color: var(--fg-2) !important;
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  padding: var(--pd1);
+}
+body.section-docs .docs-content {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  max-width: 100% !important;
+}
+body.section-docs .docs-content table {
+  border: solid 0px var(--bg-5) !important;
+}
+body.section-docs .docs-content table th {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+body.section-docs .docs-content table td {
+  text-align: left !important;
+  padding-left: var(--padding_10);
+}
+body.section-docs .docs-content table td,
+body.section-docs .docs-content table th {
+  background-color: transparent !important;
+  border: solid 0.5px var(--bg-5);
+  border-top: solid 0.5px var(--bg-5);
+  border-bottom: solid 0px var(--bg-5);
+  border-left: solid 0.5px var(--bg-5);
+  border-right: solid 0px var(--bg-5);
+}
+body.section-docs .docs-content table tr:last-child td {
+  border-bottom: solid 0.5px var(--bg-5);
+}
+body.section-docs .docs-content table td:last-child,
+body.section-docs .docs-content table th:last-child {
+  border-right: solid 0.5px var(--bg-5);
+}
+/*gitlab*/
+body.gl-dark .toggle-sidebar-button:hover {
+  color: var(--fg-0) !important;
+  background: #008cff !important;
+  background-color: #008cff !important;
+  border: solid 0.5px btc !important;
+  border-left: solid 0.5px btc !important;
+  border-right: solid 0.5px btc !important;
+  border-top: solid 0.5px btc !important;
+  border-bottom: solid 0.5px btc !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.gl-dark .gl-icon {
+  color: var(--fg-0) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.gl-dark .btn svg {
+  fill: var(--fg-0) !important;
+}
+body.gl-dark .label-monospace {
+  color: var(--fg-0) !important;
+  background: #008cff !important;
+  background-color: #008cff !important;
+  border: solid 0.5px #008cff !important;
+  border-left: solid 0.5px #008cff !important;
+  border-right: solid 0.5px #008cff !important;
+  border-top: solid 0.5px #008cff !important;
+  border-bottom: solid 0.5px #008cff !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.gl-dark .dropdown * {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.gl-dark .dropdown button {
+  border-color: var(--bg-2) !important;
+}
+body.gl-dark [class*='file-title'],
+body.gl-dark [class*='file-title'] *:not([class*='button']):not([class*='btn']):not(button):not(svg):not(use) {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.gl-dark .js-copy-blob-source-btn-tooltip {
+  min-width: auto;
+}
+/*https://docs.gitlab.com*/
+section.gl-docs .alert-warning {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+section.gl-docs .nav-wrapper {
+  border-right: solid 0.5px var(--bg-5);
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+section.gl-docs .table-of-contents .nav-link {
+  border-left: solid 0.5px var(--bg-5);
+}
+/*des-monitor - https://des-monitor-prometheus-devel.ews.gic.ericsson.se/graph*/
+body.des-monitor-prometheus-devel_ews_gic_ericsson {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn {
+  border-radius: 3px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  font-weight: 400;
+  line-height: unset;
+  min-width: 60px;
+  min-height: 20px;
+  padding-left: var(--pd2);
+  padding-right: var(--pd2);
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn *,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn:before,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn *:before,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn:after,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn *:after {
+  color: var(--fg-0) !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn>svg {
+  fill: var(--fg-0) !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn *,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn:hover,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn *:hover {
+  border: solid 0.5px #008cff !important;
+  border-color: #008cff !important;
+  background-color: #008cff !important;
+  background: #008cff !important;
+  background-image: unset;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn>[class*="button"],
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn>[class*="btn"],
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn>button,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn>[class*="button"] *,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn>[class*="btn"] *,
+body.des-monitor-prometheus-devel_ews_gic_ericsson .btn>button * {
+  padding: 0px !important;
+  border-width: 0px !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson .container-fluid {
+  width: 95%;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container {
+  width: 95%;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .form-control,
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .tab-pane {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-top-left-radius: 0px !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .nav-tabs {
+  border-bottom: solid 0px var(--bg-5);
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .nav-tabs a {
+  color: #008cff !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .nav-tabs a.active {
+  color: var(--fg-3) !important;
+  background: var(--bg-5) !important;
+  background-color: var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container svg text {
+  fill: var(--fg-3) !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .graph {
+  width: 95%;
+  left: 50px;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .graph svg {
+  width: 100%;
+  border: solid 0.5px var(--bg-5);
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .rickshaw_legend {
+  width: 100%;
+  overflow: auto;
+  margin-left: 0px;
+  border: solid 0.5px var(--bg-5);
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .tab-content input {
+  margin-left: var(--md1) !important;
+  margin-right: var(--md1) !important;
+}
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .table td,
+body.des-monitor-prometheus-devel_ews_gic_ericsson #graph_container .table th {
+  border-top: solid 0.5px var(--bg-5) !important;
+}
+/*prometheus.io*/
+body.prometheus>.container {
+  width: 95%;
+}
+body.prometheus>.container .col-md-3 {
+  width: 20%;
+}
+body.prometheus>.container .col-md-9 {
+  width: 80%;
+}
+body.prometheus>.container .side-nav div {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.prometheus>.container .side-nav li ul li {
+  border-left: solid 0.5px var(--bg-5) !important;
+}
+body.prometheus>.container .side-nav li ul li.active {
+  border-left: solid 0.5px #008cff !important;
+  border-radius: 0px !important;
+}
+body.prometheus>.container .side-nav li ul li.current,
+body.prometheus>.container .side-nav li ul li .current {
+  border-left: solid 0.5px var(--v2-7) !important;
+  margin-left: 10px !important;
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.prometheus>.container .page-header {
+  border-bottom: solid 0.5px var(--bg-5) !important;
+}
+body.prometheus>.container .doc-content .open-source-notice {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.prometheus>.container .toc,
+body.prometheus>.container .toc * {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.prometheus>.container .toc {
+  border: solid 0.5px var(--bg-5);
+  border-radius: 6px;
+}
+body.prometheus .container {
+  margin: var(--md1) !important;
+  margin-left: var(--md1) !important;
+  margin-right: var(--md1) !important;
+}
+/*apache.org*/
+body.td-home>.main>.header,
+body.td-section>.main>.header,
+body.page-home>.main>.header,
+body.td-home>.top,
+body.td-section>.top,
+body.page-home>.top,
+body.td-home>#top,
+body.td-section>#top,
+body.page-home>#top,
+body.td-home>.main>.header *:not(a),
+body.td-section>.main>.header *:not(a),
+body.page-home>.main>.header *:not(a),
+body.td-home>.top *:not(a),
+body.td-section>.top *:not(a),
+body.page-home>.top *:not(a),
+body.td-home>#top *:not(a),
+body.td-section>#top *:not(a),
+body.page-home>#top *:not(a) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body>.main>.header,
+body>.top,
+body>#top,
+body>.main>.header *:not(a),
+body>.top *:not(a),
+body>#top *:not(a) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body>#main>#publishedStrip,
+body>#main>.breadtrail,
+body>#main>#publishedStrip *:not(a),
+body>#main>.breadtrail *:not(a) {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home p,
+body.td-section p,
+body.page-home p,
+body.td-home li,
+body.td-section li,
+body.page-home li {
+  color: var(--fg-3);
+  background: var(--bg-3);
+  background-color: var(--bg-3);
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home .toctree-expand::Before,
+body.td-section .toctree-expand::Before,
+body.page-home .toctree-expand::Before {
+  display: none;
+}
+body.td-home .warning,
+body.td-section .warning,
+body.page-home .warning,
+body.td-home .warning *:not(code):not(code *),
+body.td-section .warning *:not(code):not(code *),
+body.page-home .warning *:not(code):not(code *) {
+  color: var(--fg-0) !important;
+  background: var(--v2-5) !important;
+  background-color: var(--v2-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home .note,
+body.td-section .note,
+body.page-home .note,
+body.td-home .note *:not(code):not(code *),
+body.td-section .note *:not(code):not(code *),
+body.page-home .note *:not(code):not(code *) {
+  color: var(--fg-0) !important;
+  background: var(--v5-5) !important;
+  background-color: var(--v5-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home .tip,
+body.td-section .tip,
+body.page-home .tip,
+body.td-home .tip *:not(code):not(code *),
+body.td-section .tip *:not(code):not(code *),
+body.page-home .tip *:not(code):not(code *) {
+  color: var(--fg-0) !important;
+  background: var(--v4-5) !important;
+  background-color: var(--v4-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home a,
+body.td-section a,
+body.page-home a {
+  border-left: solid 0px var(--bg-5) !important;
+}
+body.td-home .container,
+body.td-section .container,
+body.page-home .container {
+  margin: auto !important;
+}
+body.td-home #dag-runs *::Before,
+body.td-section #dag-runs *::Before,
+body.page-home #dag-runs *::Before {
+  display: none;
+}
+body.td-home #dag-runs .highlight,
+body.td-section #dag-runs .highlight,
+body.page-home #dag-runs .highlight {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home #dag-runs .copybtn,
+body.td-section #dag-runs .copybtn,
+body.page-home #dag-runs .copybtn {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home .card,
+body.td-section .card,
+body.page-home .card {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home .card .box-event,
+body.td-section .card .box-event,
+body.page-home .card .box-event,
+.td-sidebar {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home .card .box-event *:not(input),
+body.td-section .card .box-event *:not(input),
+body.page-home .card .box-event *:not(input),
+.td-sidebar *:not(input) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home .td-sidebar::-webkit-scrollbar-thumb,
+body.td-section .td-sidebar::-webkit-scrollbar-thumb,
+body.page-home .td-sidebar::-webkit-scrollbar-thumb {
+  border-radius: 0px !important;
+  border-width: 0px !important;
+  background-color: #008cff !important;
+}
+body.td-home .base-layout--button,
+body.td-section .base-layout--button,
+body.page-home .base-layout--button {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.td-home .base-layout--button button,
+body.td-section .base-layout--button button,
+body.page-home .base-layout--button button {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-color: transparent !important;
+}
+body.td-home .search-form__button,
+body.td-section .search-form__button,
+body.page-home .search-form__button,
+body.td-home .base-layout--button,
+body.td-section .base-layout--button,
+body.page-home .base-layout--button,
+body.td-home .apache-feather,
+body.td-section .apache-feather,
+body.page-home .apache-feather {
+  display: none;
+}
+body.td-home .search-form,
+body.td-section .search-form,
+body.page-home .search-form {
+  border-width: 0px !important;
+}
+.config-list>li:nth-child(odd) {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+.config-list table * {
+  border: 0.5px !important;
+}
+/*apache.org java api docs, oracle java docs*/
+body.package-index-page .summary-table,
+body.package-declaration-page .summary-table,
+body.help-page .summary-table,
+body.package-index-page .summary-table *,
+body.package-declaration-page .summary-table *,
+body.help-page .summary-table * {
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.package-index-page .summary-table,
+body.package-declaration-page .summary-table,
+body.help-page .summary-table {
+  margin-bottom: var(--md5);
+}
+body.package-index-page .summary-table,
+body.package-declaration-page .summary-table,
+body.help-page .summary-table,
+body.package-index-page .summary-table .details-table,
+body.package-declaration-page .summary-table .details-table,
+body.help-page .summary-table .details-table {
+  border-color: var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5);
+  border-right: solid 0.5px var(--bg-5);
+  border-bottom: solid 0.5px var(--bg-5);
+}
+body.package-index-page .summary-table .table-header,
+body.package-declaration-page .summary-table .table-header,
+body.help-page .summary-table .table-header {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.package-index-page .summary-table .col-first,
+body.package-declaration-page .summary-table .col-first,
+body.help-page .summary-table .col-first,
+body.package-index-page .summary-table .col-last,
+body.package-declaration-page .summary-table .col-last,
+body.help-page .summary-table .col-last {
+  border-top: solid 0.5px var(--bg-5);
+}
+body.package-index-page .summary-table .col-first,
+body.package-declaration-page .summary-table .col-first,
+body.help-page .summary-table .col-first {
+  border-right: solid 0.5px var(--bg-5);
+}
+body.package-index-page #ui-id-1 .ui-autocomplete-category,
+body.package-declaration-page #ui-id-1 .ui-autocomplete-category,
+body.help-page #ui-id-1 .ui-autocomplete-category {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.package-index-page #ui-id-1 li.result-item,
+body.package-declaration-page #ui-id-1 li.result-item,
+body.help-page #ui-id-1 li.result-item {
+  border-bottom: solid 0.5px var(--bg-5);
+  line-height: 1.5em;
+}
+body.package-index-page .nav-list-search label,
+body.package-declaration-page .nav-list-search label,
+body.help-page .nav-list-search label {
+  right: var(--md2);
+}
+body.package-index-page #search-input,
+body.package-declaration-page #search-input,
+body.help-page #search-input {
+  padding: var(--pd1);
+  right: var(--md2);
+}
+body.package-index-page #reset-button,
+body.package-declaration-page #reset-button,
+body.help-page #reset-button {
+  display: none;
+}
+.ohc-grid,
+.ohc-grid>main,
+.ohc-grid .ohc-sidebar,
+.ohc-grid article {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+.ohc-grid .ohc-sidebar,
+.ohc-grid .ohc-sidebar *:not(a) {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+.ohc-grid .ohc-sidebar {
+  border-right: solid 0.5px var(--bg-5);
+}
+.ohc-grid article>.section>.subsection {
+  color: var(--fg-3) !important;
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+.ohc-grid article>.section>.subsection>header.small-logo {
+  display: none;
+}
+.ohc-grid article>.section>.subsection .section-border {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 6px !important;
+  box-shadow: unset !important;
+}
+.ohc-grid article>.section>.subsection .section-border *:not(a) {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+/*mumportaldocs*/
+div#BODY {
+  max-width: 85%;
+}
+div#BODY #HEADER {
+  left: auto;
+  width: auto;
+}
+div#BODY .backlink {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+div#BODY .backlink,
+div#BODY .backlink *:not(a) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+/*readthedocs.io*/
+body.wy-body-for-nav .wy-nav-content,
+body.wy-body-for-nav .wy-nav-content-wrap {
+  color: var(--fg-3);
+  background: var(--bg-3);
+  background-color: var(--bg-3);
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.wy-body-for-nav code {
+  color: var(--fg-2) !important;
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+/*yammer.com*/
+body.yammer #SearchBox_container,
+body.yammer #SearchBox_container * {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.yammer #SearchBox_container button {
+  display: none;
+}
+/*getpocket*/
+body.getpocket #__next>header,
+body.getpocket div.side-nav,
+body.getpocket #__next>header *,
+body.getpocket div.side-nav * {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.getpocket #__next>header button,
+body.getpocket div.side-nav button {
+  border-width: 0px !important;
+}
+body.getpocket header {
+  border-bottom: solid 0.5px var(--bg-5);
+}
+body.getpocket main ul.list button {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 6px !important;
+  box-shadow: unset !important;
+}
+body.getpocket main header {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  padding: var(--pd2);
+  border-width: 0px !important;
+}
+body.getpocket main .r7wf4l8 {
+  border-width: 0px !important;
+}
+body.getpocket .l1fcr43o a {
+  padding: var(--pd1) var(--pd4);
+}
+body.getpocket footer {
+  padding: var(--pd2) 10%;
+}
+body.getpocket footer .footer-container {
+  max-width: unset;
+  margin: auto;
+}
+body.getpocket footer .footer-container nav {
+  width: 100%;
+}
+body.getpocket .cardWrap {
+  padding: var(--pd1) !important;
+  height: auto;
+}
+body.getpocket .skdfh9i,
+body.getpocket .c18o9ext .footer,
+body.getpocket article .footer {
+  display: none;
+}
+/*opera*/
+body.opera article {
+  color: var(--fg-2) !important;
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 3px !important;
+  box-shadow: unset !important;
+}
+/*python.org*/
+body.python {
+  margin: 0px !important;
+}
+body.python div.related {
+  margin: 0px !important;
+  line-height: 3em;
+}
+body.python div.related,
+body.python div.related *:not(a):not(input) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.python div.related div.language_switcher_placeholder {
+  display: none;
+}
+body.python div.related {
+  margin-top: 0px !important;
+  border-bottom: solid 0.5px var(--bg-5);
+}
+body.python div.related form.inline-search {
+  left: 50%;
+  position: absolute;
+  min-width: 500px;
+  display: inline-block;
+}
+body.python div.related form.inline-search input[type="submit"] {
+  display: none;
+}
+body.python div.related form.inline-search input[type="text"] {
+  min-width: 500px;
+  height: 2em;
+  padding: var(--pd1);
+  padding-left: var(--pd2);
+}
+body.python div.related ~ div.related {
+  border-top: solid 0.5px var(--bg-5);
+  margin-top: var(--md1);
+}
+body.python div.document {
+  margin: 0px !important;
+}
+body.python div.document table.contentstable {
+  margin-bottom: var(--md2);
+}
+body.python div.document pre {
+  border: solid var(--bg-5) bds;
+}
+body.python div.document div.body {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  min-width: 80%;
+}
+body.python div.document div.warning,
+body.python div.document div.warning *:not(code):not(code *):not(a):not(a *) {
+  color: var(--fg-0) !important;
+  background: var(--v2-5) !important;
+  background-color: var(--v2-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.python div.document div.sphinxsidebar {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-right: solid 0.5px var(--bg-5);
+}
+body.python div.document div.sphinxsidebar #sidebarbutton {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.python div.document div.sphinxsidebar h3 {
+  padding-bottom: var(--pd2) !important;
+}
+body.python div.document div.sphinxsidebar li {
+  line-height: 1.5em;
+}
+/*https://elt.oup.com*/
+body.elt_oup #container {
+  width: 80% !important;
+  max-width: 80% !important;
+}
+body.elt_oup #container #middle_matter {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.elt_oup #container #middle_matter *:not([class*="playing"]) {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.elt_oup #container #middle_matter .fl-left,
+body.elt_oup #container #middle_matter .fl-left *,
+body.elt_oup #container #middle_matter h1 {
+  font-size: 40px;
+}
+@media screen and (min-width: 2000px) {
+  body.elt_oup #container #middle_matter .fl-left,
+  body.elt_oup #container #middle_matter .fl-left *,
+  body.elt_oup #container #middle_matter h1 {
+    font-size: 55px !important;
+  }
+}
+body.elt_oup #container #middle_matter #song {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 6px !important;
+  box-shadow: unset !important;
+}
+body.elt_oup #container #middle_matter #song #script {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 6px !important;
+  box-shadow: unset !important;
+  padding: var(--pd3);
+}
+body.elt_oup #container #middle_matter #song #script span.playing {
+  color: var(--v2-5) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.elt_oup #container #middle_matter #song img.fl-right {
+  min-height: 600px !important;
+  margin: 40px !important;
+}
+@media screen and (min-width: 2000px) {
+  body.elt_oup #container #middle_matter #song img.fl-right {
+    min-height: 800px !important;
+  }
+}
+/*stackoverflow*/
+body.stackoverflow .container>#content {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.stackoverflow .left-sidebar {
+  margin-right: 0px !important;
+  padding: var(--pd2) !important;
+  width: 280px;
+  min-width: 280;
+}
+body.stackoverflow .js-top-search-popover {
+  border-radius: 6px !important;
+  border: solid 0.5px var(--bg-5);
+}
+body.stackoverflow .js-top-search-popover,
+body.stackoverflow .js-top-search-popover *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.stackoverflow .js-top-search-popover *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.stackoverflow .js-top-search-popover a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.stackoverflow .js-top-search-popover * {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.stackoverflow .s-sidebarwidget {
+  border: solid 0.5px var(--bg-5) !important;
+}
+body.stackoverflow * {
+  border-color: var(--bg-5) !important;
+  border-width: 0.5px !important;
+}
+body.stackoverflow #content {
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0px var(--bg-5) !important;
+  border-top: solid 0px var(--bg-5) !important;
+  border-bottom: solid 0px var(--bg-5) !important;
+}
+/*tgf*/
+body[class*="npee_gic_ericsson"] .container {
+  min-width: 1100px;
+  padding: var(--pd1) !important;
+}
+@media screen and (min-width: 1300px) {
+  body[class*="npee_gic_ericsson"] .container {
+    min-width: 1200px;
+  }
+}
+body[class*="npee_gic_ericsson"] button {
+  margin-left: var(--md1);
+}
+body[class*="npee_gic_ericsson"] table {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0 !important;
+  border-spacing: 0 !important;
+}
+body[class*="npee_gic_ericsson"] table tr th,
+body[class*="npee_gic_ericsson"] table tr td {
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0px var(--bg-5) !important;
+  border-bottom: solid 0px var(--bg-5) !important;
+  padding: var(--pd2) !important;
+}
+body[class*="npee_gic_ericsson"] table tbody tr:first-child td {
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+body[class*="npee_gic_ericsson"] table thead tr:first-child th {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+body[class*="npee_gic_ericsson"] table tr:last-child th,
+body[class*="npee_gic_ericsson"] table tr:last-child td {
+  border-bottom: solid 0.5px var(--bg-5) !important;
+}
+body[class*="npee_gic_ericsson"] table th:last-child,
+body[class*="npee_gic_ericsson"] table td:last-child {
+  border-right: solid 0.5px var(--bg-5) !important;
+}
+body[class*="npee_gic_ericsson"] table tr.warning {
+  color: var(--fg-3) !important;
+  background: var(--v2-5) !important;
+  background-color: var(--v2-5) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="npee_gic_ericsson"] table tr.warning * {
+  color: var(--fg-0) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+/*jira - eteamproject.internal.ericsson.com */
+body[class*="eteamproject_internal_ericsson"] * {
+  border-color: var(--bg-5) !important;
+  background-color: var(--bg-3);
+  background: var(--bg-3);
+}
+body[class*="eteamproject_internal_ericsson"] #page header .aui-quicksearch,
+body[class*="eteamproject_internal_ericsson"] #page header #quickSearchInput {
+  min-width: 300px;
+}
+@media screen and (min-width: 2000px) {
+  body[class*="eteamproject_internal_ericsson"] #page header .aui-quicksearch,
+  body[class*="eteamproject_internal_ericsson"] #page header #quickSearchInput {
+    min-width: 500px;
+  }
+}
+body[class*="eteamproject_internal_ericsson"] #page #content .aui-page-panel {
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] #page #content .ghx-column {
+  padding: var(--pd1) !important;
+}
+body[class*="eteamproject_internal_ericsson"] #page #content #ghx-pool-wrapper *:not([class*="js-issue"]):not([class*="js-issue"] *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] #page #content .ghx-grabber-transparent {
+  display: none !important;
+}
+body[class*="eteamproject_internal_ericsson"] #page #content .js-issue {
+  border: solid 0.5px var(--bg-5) !important;
+  border-radius: 6px !important;
+}
+body[class*="eteamproject_internal_ericsson"] #page #content .js-issue,
+body[class*="eteamproject_internal_ericsson"] #page #content .js-issue *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] #page #content .js-issue .ghx-issue-content {
+  padding: var(--pd2) !important;
+}
+body[class*="eteamproject_internal_ericsson"] div.issue-body-content {
+  padding: var(--pd3);
+}
+body[class*="eteamproject_internal_ericsson"] div.issue-body-content .ops {
+  background-color: var(--bg-3) !important;
+}
+body[class*="eteamproject_internal_ericsson"] div.issue-body-content #description-val {
+  color: var(--fg-2);
+  background: var(--bg-4) !important;
+  background-color: var(--bg-4) !important;
+  border: solid 0.5px var(--bg-5);
+  border-left: solid 0.5px var(--bg-5);
+  border-right: solid 0.5px var(--bg-5);
+  border-top: solid 0.5px var(--bg-5);
+  border-bottom: solid 0.5px var(--bg-5);
+  border-radius: 3px !important;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] div.issue-body-content #description-val *:not(a) {
+  color: var(--fg-2) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] #issue-content {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] #issue-content ul.labels li .lozenge,
+body[class*="eteamproject_internal_ericsson"] #issue-content ul.labels li .lozenge *:not(a):not(a *) {
+  color: var(--fg-0) !important;
+  background: var(--bg-6) !important;
+  background-color: var(--bg-6) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] #issue-content ul.labels li .lozenge *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] #issue-content ul.labels li .lozenge a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] #addcomment-inner,
+body[class*="eteamproject_internal_ericsson"] #addcomment-inner * {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] #addcomment-inner {
+  margin-right: -15px;
+  float: right;
+}
+body[class*="eteamproject_internal_ericsson"] .issue-data-block.focused {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] #gerrit-reviews-left-panel {
+  width: 99% !important;
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] #announcement-banner,
+body[class*="eteamproject_internal_ericsson"] .alertHeader,
+body[class*="eteamproject_internal_ericsson"] .preformatted.panel {
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] a.lozenge {
+  border-radius: 6px !important;
+}
+body[class*="eteamproject_internal_ericsson"] .issue-drop-zone {
+  border: dashed 0.5px var(--bg-5);
+}
+body[class*="eteamproject_internal_ericsson"] #attachmentmodule #attachment_thumbnails .attachment-content .attachment-thumb {
+  border: solid 0.5px var(--bg-5);
+  margin-left: var(--md1) !important;
+}
+body[class*="eteamproject_internal_ericsson"] thead {
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] a.aui-button {
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] div.wiki-edit-undo-redo-buttons {
+  border-width: 0px !important;
+  float: unset;
+}
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button {
+  border-radius: 3px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  font-weight: 400;
+  line-height: unset;
+  min-width: 60px;
+  min-height: 20px;
+  padding-left: var(--pd2);
+  padding-right: var(--pd2);
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
+}
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary *,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button *,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary:before,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button:before,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary *:before,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button *:before,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary:after,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button:after,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary *:after,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button *:after {
+  color: var(--fg-0) !important;
+}
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary>svg,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button>svg {
+  fill: var(--fg-0) !important;
+}
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary *,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button *,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary:hover,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button:hover,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary *:hover,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button *:hover {
+  border: solid 0.5px #008cff !important;
+  border-color: #008cff !important;
+  background-color: #008cff !important;
+  background: #008cff !important;
+  background-image: unset;
+}
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary>[class*="button"],
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button>[class*="button"],
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary>[class*="btn"],
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button>[class*="btn"],
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary>button,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button>button,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary>[class*="button"] *,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button>[class*="button"] *,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary>[class*="btn"] *,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button>[class*="btn"] *,
+body[class*="eteamproject_internal_ericsson"] .aui-button-primary>button *,
+body[class*="eteamproject_internal_ericsson"] #footer-comment-button>button * {
+  padding: 0px !important;
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] .aui-buttons .aui-button~.aui-button,
+body[class*="eteamproject_internal_ericsson"] .aui-button {
+  margin-left: 0px;
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] button.aui-iconfont-appswitcher {
+  padding: var(--pd1) !important;
+}
+body[class*="eteamproject_internal_ericsson"] .aui-dd-parent>button {
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] span.aui-icon:before {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] span.aui-icon {
+  color: transparent !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  text-indent: -3000px;
+}
+body[class*="eteamproject_internal_ericsson"] nav.editor-toggle-tabs {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body[class*="eteamproject_internal_ericsson"] span.aui-iconfont-appswitcher {
+  color: var(--bg-2) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eteamproject_internal_ericsson"] span.blender,
+body[class*="eteamproject_internal_ericsson"] span.aui-iconfont-down,
+body[class*="eteamproject_internal_ericsson"] #issue-tabs::before {
+  display: none !important;
+}
+/*jenkins*/
+body[class*="eiffel_gic_ericsson"] #page-head {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+/*TODO - How to dynamically change value here, rather than hardcoded it.*/
+  height: 92px;
+}
+@media screen and (min-width: 2000px) {
+  body[class*="eiffel_gic_ericsson"] #page-head {
+    height: 112px;
+  }
+}
+body[class*="eiffel_gic_ericsson"] #page-head #breadcrumbBar {
+  border-bottom: solid 0.5px var(--bg-5);
+  height: 2.5em;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #breadcrumbBar,
+body[class*="eiffel_gic_ericsson"] #page-head #breadcrumbBar *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #breadcrumbBar *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #breadcrumbBar a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #breadcrumbBar * {
+  height: auto;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #breadcrumbs {
+  border-width: 0px !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #breadcrumbs li {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header {
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  height: 3em;
+  display: flex;
+  justify-content: space-between;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header,
+body[class*="eiffel_gic_ericsson"] #page-head #header *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header .page-header__brand {
+  padding: 0.5em;
+  height: inherit;
+  display: inline-flex;
+  align-items: center;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header .page-header__brand .logo {
+  top: unset;
+  position: unset;
+  display: inline-flex;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header .page-header__brand #jenkins-head-icon,
+body[class*="eiffel_gic_ericsson"] #page-head #header .page-header__brand #jenkins-name-icon {
+  top: unset;
+  bottom: unset;
+  left: unset;
+  right: unset;
+  position: unset;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header .searchbox {
+  display: inline-flex;
+  align-items: center;
+  right: calc(50% - 183px);
+  position: absolute;
+  padding: var(--pd1) var(--pd1) !important;
+  height: inherit;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header .searchbox #search-box {
+  height: 2em;
+  font-size: var(--font_size) !important;
+  margin: auto;
+  padding: 0.25rem 2.5rem;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header .searchbox #searchform {
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header .searchbox #searchform a {
+  height: 2.5rem;
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  display: inline-flex;
+  padding: 0.5rem;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+body[class*="eiffel_gic_ericsson"] #page-head #header .login {
+  padding: var(--pd1) var(--pd2);
+  height: inherit;
+  display: flex;
+  align-items: center;
+  top: unset;
+  bottom: unset;
+  left: unset;
+  right: var(--md1);
+  position: absolute;
+}
+body[class*="eiffel_gic_ericsson"] #page-body {
+/*TODO - How to dynamically change value here, rather than hardcoded it.*/
+  padding-top: 90px;
+}
+@media screen and (min-width: 2000px) {
+  body[class*="eiffel_gic_ericsson"] #page-body {
+    padding-top: 110px;
+  }
+}
+body[class*="eiffel_gic_ericsson"] #page-body div {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body>#side-panel {
+  padding: var(--pd1);
+  border-right: solid 0.5px var(--bg-5) !important;
+  height: 100% !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body>#side-panel #buildHistoryPage {
+  position: inherit;
+}
+body[class*="eiffel_gic_ericsson"] #page-body>#side-panel #buildHistoryPage .clear {
+  display: none;
+}
+body[class*="eiffel_gic_ericsson"] #page-body>#side-panel #buildHistoryPage .build-search-row input {
+  padding-left: var(--pd1);
+  padding-right: var(--pd1);
+  width: 100%;
+  border: solid 0.5px var(--bg-5);
+  height: 2em;
+  font-size: var(--font_size) !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body>#side-panel .pane-footer {
+  display: none;
+}
+body[class*="eiffel_gic_ericsson"] #page-body>#main-panel {
+  padding: var(--pd5) !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body>#main-panel .container-fluid {
+  margin-left: 0px !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body>#main-panel .container-fluid td.setting-name {
+  color: var(--v2-5) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  text-align: right !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body .build-row.multi-line .build-row-cell {
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  padding-top: var(--pd5);
+  padding-bottom: var(--pd5);
+}
+body[class*="eiffel_gic_ericsson"] #page-body .build-row.multi-line .build-row-cell .block {
+  overflow: unset;
+  overflow-wrap: break-word;
+  padding: var(--pd2);
+}
+body[class*="eiffel_gic_ericsson"] #page-body div.pane-frame {
+  margin-top: 1px;
+  border: solid 0.5px var(--bg-5) !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body div.pane-frame {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border: solid 0.5px var(--bg-5) !important;
+  border-left: solid 0.5px var(--bg-5) !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: solid 0.5px var(--bg-5) !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-radius: 6px !important;
+  box-shadow: unset !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body div.pane-frame *:not(a):not(input):not(img) {
+  color: var(--fg-3) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body div.pane-frame .pane-header,
+body[class*="eiffel_gic_ericsson"] #page-body div.pane-frame td.pane {
+  padding: var(--pd5);
+}
+body[class*="eiffel_gic_ericsson"] #page-body #promotemenu,
+body[class*="eiffel_gic_ericsson"] #page-body #promotemenu *:not(a) {
+  border-width: 0px !important;
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body[class*="eiffel_gic_ericsson"] #page-body .tabBar .tab a {
+  border: solid 0.5px var(--bg-5);
+  border-bottom: solid 0px var(--bg-5) !important;
+}
+body[class*="eiffel_gic_ericsson"] div.login div.footer {
+  display: none;
+}
+.simple-page form .submit input {
+  color: var(--fg-0) !important;
+  background: #008cff !important;
+  background-color: #008cff !important;
+  border: solid 0.5px #008cff !important;
+  border-left: solid 0.5px #008cff !important;
+  border-right: solid 0.5px #008cff !important;
+  border-top: solid 0.5px #008cff !important;
+  border-bottom: solid 0.5px #008cff !important;
+  border-radius: 3px !important;
+  box-shadow: unset !important;
+}
+/*w3schools*/
+body.w3schools #pagetop {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+  line-height: unset !important;
+  float: unset !important;
+}
+body.w3schools #pagetop,
+body.w3schools #pagetop *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-1) !important;
+  background-color: var(--bg-1) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.w3schools #pagetop *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.w3schools #pagetop a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.w3schools #pagetop>body.w3schools #pagetop {
+  border-bottom: solid 0px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.w3schools #pagetop {
+  width: 100% !important;
+  min-height: 3em !important;
+  position: fixed !important;
+  top: 0px !important;
+  z-index: 1 !important;
+  display: inline;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.w3schools #pagetop *:not(input[type="search"]) {
+  padding: 0px !important;
+}
+body.w3schools #topnav {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+  line-height: unset !important;
+  float: unset !important;
+}
+body.w3schools #topnav,
+body.w3schools #topnav *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.w3schools #topnav *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.w3schools #topnav a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.w3schools #topnav>body.w3schools #topnav {
+  border-bottom: solid 0px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.w3schools #topnav {
+  display: inline;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 2.5em !important;
+  position: fixed !important;
+  top: 3em !important;
+  border-bottom: solid 0.5px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.w3schools #topnav * {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+body.w3schools #topnav>div>.w3-bar.w3-left {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+body.w3schools #topnav a.topnav-icons {
+  padding-top: unset !important;
+  padding-bottom: unset !important;
+}
+body.w3schools #sidenav {
+  top: 0px !important;
+  position: relative !important;
+}
+body.w3schools #sidenav #leftmenuinner {
+  padding-top: unset !important;
+  top: auto !important;
+}
+body.w3schools #sidenav #leftmenuinner {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+  line-height: unset !important;
+  float: unset !important;
+}
+body.w3schools #sidenav #leftmenuinner,
+body.w3schools #sidenav #leftmenuinner *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-2) !important;
+  background-color: var(--bg-2) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.w3schools #sidenav #leftmenuinner *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.w3schools #sidenav #leftmenuinner a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.w3schools #sidenav #leftmenuinner>body.w3schools #sidenav #leftmenuinner {
+  border-bottom: solid 0px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+body.w3schools #sidenav #leftmenuinner {
+  padding-right: 0px !important;
+  border-right: solid 0.5px var(--bg-5) !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-bottom: 0px !important;
+}
+body.w3schools #darkmodemenu {
+  display: none;
+}
+/*https://ericssonlearning.percipio.com*/
+body.ericssonlearning_percipio,
+body.degreed {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.ericssonlearning_percipio div[class*="book"],
+body.degreed div[class*="book"],
+body.ericssonlearning_percipio div[class*="Book"],
+body.degreed div[class*="Book"] {
+  border-radius: 6px !important;
+  border: solid 0.5px var(--bg-5);
+  margin: var(--md1) !important;
+  padding: var(--pd2) !important;
+}
+body.ericssonlearning_percipio div[class*="book"],
+body.degreed div[class*="book"],
+body.ericssonlearning_percipio div[class*="Book"],
+body.degreed div[class*="Book"],
+body.ericssonlearning_percipio div[class*="book"] *:not(a):not(a *),
+body.degreed div[class*="book"] *:not(a):not(a *),
+body.ericssonlearning_percipio div[class*="Book"] *:not(a):not(a *),
+body.degreed div[class*="Book"] *:not(a):not(a *) {
+  color: var(--fg-3) !important;
+  background: var(--bg-3) !important;
+  background-color: var(--bg-3) !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.ericssonlearning_percipio div[class*="book"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body.degreed div[class*="book"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body.ericssonlearning_percipio div[class*="Book"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]),
+body.degreed div[class*="Book"] *:not(a):not(a *):not(input):not([class*="icon"]):not([class*="dropdown"]) {
+  color: var(--fg-3) !important;
+  background: transparent;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: unset !important;
+  border-width: 0px !important;
+}
+body.ericssonlearning_percipio div[class*="book"] a,
+body.degreed div[class*="book"] a,
+body.ericssonlearning_percipio div[class*="Book"] a,
+body.degreed div[class*="Book"] a {
+  color: #008cff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0px;
+  box-shadow: unset !important;
+}
+body.ericssonlearning_percipio #maincontentid,
+body.degreed #maincontentid {
+  max-width: 90% !important;
+  min-width: 85% !important;
+}
